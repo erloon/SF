@@ -6,8 +6,8 @@ namespace SF.Domain
     public class InsuranceContribution : Entity
     {
         public Guid UserId { get; protected set; }
-        public decimal InsuranceBaseAmount { get; protected set; } // Podstawa wymiaru składek
-        public decimal HealthBaseAmount { get; protected set; } // kwota bazowa dla skłądki zdrowotnej 
+        public decimal InsuranceBaseAmount { get; protected set; } // Podstawa wymiaru skladek
+        public decimal HealthBaseAmount { get; protected set; } // kwota bazowa dla skladki zdrowotnej 
         public decimal HealthInsurance { get; protected set; } // zdrowotne
         public decimal HealthInsuranceDiscount { get; protected set; } // zdrowotne do us
         public decimal MedicalInsurance { get; protected set; } // Chorobowe
@@ -23,9 +23,9 @@ namespace SF.Domain
             if (healthBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(healthBaseAmount));
             if (insuranceContributionsPercentage == null) throw new ArgumentNullException(nameof(insuranceContributionsPercentage));
 
-
+            this.Id = new Guid();
             this.InsuranceBaseAmount = insuranceBaseAmount;
-            this.HealthInsurance = healthBaseAmount;
+            this.HealthBaseAmount = healthBaseAmount;
 
             CalculateInsuranceParts(insuranceContributionsPercentage);
         }
@@ -78,7 +78,7 @@ namespace SF.Domain
         private void CalculateHealthInsurance(InsuranceContributionsPercentage insuranceContributionsPercentage, decimal healthBaseAmount)
         {
             this.HealthInsurance = CalculateInsurance(insuranceContributionsPercentage.Health, healthBaseAmount);
-            this.HealthInsuranceDiscount = CalculateInsurance(insuranceContributionsPercentage.HealthToDiscount, this.HealthInsurance);
+            this.HealthInsuranceDiscount = CalculateInsurance(insuranceContributionsPercentage.HealthToDiscount, healthBaseAmount);
         }
 
         private decimal CalculateInsurance(decimal percentage, decimal baseAmount)
