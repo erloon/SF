@@ -104,5 +104,27 @@ namespace SF.Tests.Domain
                 var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT,null);
             });
         }
+
+        [Test]
+        public void InsuranceContributionsSum_ShouldReturnValue_Success()
+        {
+            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+
+            var insuranceContributionsSum = insuranceContribution.InsuranceContributionsSum();
+
+            Assert.NotNull(insuranceContribution);
+            Assert.AreEqual(1166.85m, insuranceContributionsSum);
+        }
+
+        [Test]
+        public void ISocialInsuranceSum_ShouldReturnValue_Success()
+        {
+            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+
+            var socialInsuranceSum = insuranceContribution.SocialInsuranceSum();
+
+            Assert.NotNull(insuranceContribution);
+            Assert.AreEqual(846.91, socialInsuranceSum);
+        }
     }
 }

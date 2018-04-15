@@ -32,6 +32,7 @@ namespace SF.Domain
 
         public decimal InsuranceContributionsSum()
         {
+
             return Math.Round((HealthInsurance + MedicalInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance), 2);
         }
 
