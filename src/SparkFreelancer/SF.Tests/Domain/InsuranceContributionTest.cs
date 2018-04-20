@@ -1,6 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
 using SF.Domain;
+using SF.Domain.DTO;
+using SF.Tests.Factories;
 using SF.Tests.Writables;
 
 namespace SF.Tests.Domain
@@ -20,22 +22,18 @@ namespace SF.Tests.Domain
         private decimal HEALTHBASEAMOUNT = 3554.93m;
 
 
-        private InsuranceContributionsPercentage CreateInsuranceContributionsPercentage()
+        
+
+        private InsuranceContributionContext CreateContext(decimal? healthBase = null, decimal? insuranceBaseAmount = null, InsuranceContributionsPercentage percentage = null)
         {
-            return new WritableInsuranceContributionsPercentage()
-                .WithAccident(ACCIDENT)
-                .WithHealth(HEALTH)
-                .WithHealthToDiscount(HEALTHTODISCOUNT)
-                .WithMedical(MEDICAL)
-                .WithDisabiliti(DISABILITI)
-                .WithLaborFound(LABORFOUND)
-                .WithRetirement(RETIREMENT);
+            return InsuranceContributionContextFactory.Create(healthBase, insuranceBaseAmount, percentage);
         }
 
         [Test]
         public void Ctor_SetAllBaseAmounts_Success()
         {
-            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+            var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            var insuranceContribution = new InsuranceContribution(context);
 
             Assert.NotNull(insuranceContribution);
             Assert.AreEqual(insuranceContribution.HealthBaseAmount, HEALTHBASEAMOUNT);
@@ -46,7 +44,8 @@ namespace SF.Tests.Domain
         [Test]
         public void Ctor_ShouldCalculate_HealthContribution_Success()
         {
-            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+            var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            var insuranceContribution = new InsuranceContribution(context);
 
             Assert.AreEqual(319.94m, insuranceContribution.HealthInsurance);
             Assert.AreEqual(275.51m, insuranceContribution.HealthInsuranceDiscount);
@@ -55,7 +54,8 @@ namespace SF.Tests.Domain
         [Test]
         public void Ctor_ShouldCalculate_BaseContribution_Success()
         {
-            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+            var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            var insuranceContribution = new InsuranceContribution(context);
 
             Assert.AreEqual(65.31m, insuranceContribution.MedicalInsurance);
             Assert.AreEqual(213.26m, insuranceContribution.DisabilitiInsurance);
@@ -66,7 +66,8 @@ namespace SF.Tests.Domain
         [Test]
         public void Ctor_ShouldCalculate_LabourFound_Success()
         {
-            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+            var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            var insuranceContribution = new InsuranceContribution(context);
 
             Assert.AreEqual(65.31m, insuranceContribution.LaborFoundInsurance);
         }
@@ -77,8 +78,7 @@ namespace SF.Tests.Domain
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                var insuranceContribution = new InsuranceContribution(0, HEALTHBASEAMOUNT,
-                    CreateInsuranceContributionsPercentage());
+                var insuranceContribution = new InsuranceContribution(CreateContext(0));
 
             });
         }
@@ -89,8 +89,7 @@ namespace SF.Tests.Domain
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, 0,
-                    CreateInsuranceContributionsPercentage());
+                var insuranceContribution = new InsuranceContribution(CreateContext(healthBase: 0m));
 
             });
         }
@@ -101,14 +100,15 @@ namespace SF.Tests.Domain
 
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT,null);
+                var insuranceContribution = new InsuranceContribution(CreateContext(percentage:null));
             });
         }
 
         [Test]
         public void InsuranceContributionsSum_ShouldReturnValue_Success()
         {
-            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+            var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            var insuranceContribution = new InsuranceContribution(context);
 
             var insuranceContributionsSum = insuranceContribution.InsuranceContributionsSum();
 
@@ -119,7 +119,8 @@ namespace SF.Tests.Domain
         [Test]
         public void ISocialInsuranceSum_ShouldReturnValue_Success()
         {
-            var insuranceContribution = new InsuranceContribution(INSURANCEBASEAMOUNT, HEALTHBASEAMOUNT, CreateInsuranceContributionsPercentage());
+            var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            var insuranceContribution = new InsuranceContribution(context);
 
             var socialInsuranceSum = insuranceContribution.SocialInsuranceSum();
 

@@ -1,11 +1,11 @@
 ﻿using System;
+using SF.Domain.DTO;
 using SF.Infrastructure;
 
 namespace SF.Domain
 {
     public class InsuranceContribution : Entity
     {
-        public Guid UserId { get; protected set; }
         public decimal InsuranceBaseAmount { get; protected set; } // Podstawa wymiaru skladek
         public decimal HealthBaseAmount { get; protected set; } // kwota bazowa dla skladki zdrowotnej 
         public decimal HealthInsurance { get; protected set; } // zdrowotne
@@ -17,17 +17,17 @@ namespace SF.Domain
         public decimal LaborFoundInsurance { get; protected set; } // Składka na fundusz pracy
 
         protected InsuranceContribution() { }
-        public InsuranceContribution(decimal insuranceBaseAmount, decimal healthBaseAmount, InsuranceContributionsPercentage insuranceContributionsPercentage)
+        public InsuranceContribution(InsuranceContributionContext contributionContext)
         {
-            if (insuranceBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(insuranceBaseAmount));
-            if (healthBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(healthBaseAmount));
-            if (insuranceContributionsPercentage == null) throw new ArgumentNullException(nameof(insuranceContributionsPercentage));
+            if (contributionContext.InsuranceBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(contributionContext.InsuranceBaseAmount));
+            if (contributionContext.HealthBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(contributionContext.HealthBaseAmount));
+            if (contributionContext.Percentage == null) throw new ArgumentNullException(nameof(contributionContext.Percentage));
 
             this.Id = new Guid();
-            this.InsuranceBaseAmount = insuranceBaseAmount;
-            this.HealthBaseAmount = healthBaseAmount;
+            this.InsuranceBaseAmount = contributionContext.InsuranceBaseAmount;
+            this.HealthBaseAmount = contributionContext.HealthBaseAmount;
 
-            CalculateInsuranceParts(insuranceContributionsPercentage);
+            CalculateInsuranceParts(contributionContext.Percentage);
         }
 
         public decimal InsuranceContributionsSum()
