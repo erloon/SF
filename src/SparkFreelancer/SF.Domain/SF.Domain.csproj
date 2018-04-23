@@ -45,7 +45,8 @@
     <Compile Include="InsuranceContribution.cs" />
     <Compile Include="InsuranceContributionsPercentage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelfEmployeeCalculation.cs" />
+    <Compile Include="MonthlySelfEmployeeCalculation.cs" />
+    <Compile Include="TaxationForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SF.Infrastructure\SF.Infrastructure.csproj">

@@ -23,22 +23,20 @@ namespace SF.Domain
             if (contributionContext.HealthBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(contributionContext.HealthBaseAmount));
             if (contributionContext.Percentage == null) throw new ArgumentNullException(nameof(contributionContext.Percentage));
 
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
             this.InsuranceBaseAmount = contributionContext.InsuranceBaseAmount;
             this.HealthBaseAmount = contributionContext.HealthBaseAmount;
 
             CalculateInsuranceParts(contributionContext.Percentage);
         }
 
-        public decimal InsuranceContributionsSum()
+        public decimal InsuranceContributionsSum(bool withMedicalInsurance = true)
         {
+            var baseContributionSum = (HealthInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance);
 
-            return Math.Round((HealthInsurance + MedicalInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance), 2);
-        }
+            if (withMedicalInsurance) baseContributionSum += MedicalInsurance;
 
-        public decimal SocialInsuranceSum()
-        {
-            return Math.Round((MedicalInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance), 2);
+            return Math.Round(baseContributionSum, 2);
         }
 
         private void CalculateInsuranceParts(InsuranceContributionsPercentage insuranceContributionsPercentage)

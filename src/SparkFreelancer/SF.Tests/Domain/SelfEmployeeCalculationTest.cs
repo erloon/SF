@@ -16,63 +16,73 @@ namespace SF.Tests.Domain
 
         private SelfEmployeeCalculationContext CreataContext(decimal? baseAmount = null, decimal? vatRate = null, decimal? incomeCost = null, InsuranceContributionContext contributionContext = null)
         {
-            return SelfEmployeeCalculationContextFactory.Create(baseAmount, vatRate, incomeCost, contributionContext);
+            Func<TaxationForm, decimal, decimal> getIncomeRate = (form, baseamount) => 0.19m;
+            return SelfEmployeeCalculationContextFactory.Create(TaxationForm.LINEAR, getIncomeRate, baseAmount, vatRate, incomeCost, contributionContext);
         }
 
         [Test]
         public void Ctor_SetParameters_Success()
         {
-            SelfEmployeeCalculation selfEmployeeCalculation = new SelfEmployeeCalculation(CreataContext());
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
 
-            Assert.NotNull(selfEmployeeCalculation.TaxBaseAmount);
-            Assert.AreEqual(BASEAMOUNT, selfEmployeeCalculation.TaxBaseAmount);
-            Assert.AreEqual(INCOMECOSTAMOUNT, selfEmployeeCalculation.IncomeCostsAmount);
+            Assert.NotNull(monthlySelfEmployeeCalculation.TaxBaseAmount);
+            Assert.AreEqual(BASEAMOUNT, monthlySelfEmployeeCalculation.TaxBaseAmount);
+            Assert.AreEqual(INCOMECOSTAMOUNT, monthlySelfEmployeeCalculation.IncomeCostsAmount);
         }
 
         [Test]
         public void Ctor_ThrowError_IfBaseAmountLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new SelfEmployeeCalculation(CreataContext(baseAmount: -9m)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: -9m)));
 
         }
 
         [Test]
         public void Ctor_ThrowError_IfVatRateLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new SelfEmployeeCalculation(CreataContext(vatRate: -8m)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new MonthlySelfEmployeeCalculation(CreataContext(vatRate: -8m)));
 
         }
         [Test]
         public void Ctor_ThrowError_IfIncomeCostAmountLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new SelfEmployeeCalculation(CreataContext(incomeCost: -9m)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new MonthlySelfEmployeeCalculation(CreataContext(incomeCost: -9m)));
 
         }
         [Test]
         public void CalculateVatAmount_SetZero_IfTaxBaseAmountLessOrEqualZero()
         {
-            SelfEmployeeCalculation selfEmployeeCalculation = new SelfEmployeeCalculation(CreataContext(baseAmount: 0m));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 0m));
 
-            Assert.NotNull(selfEmployeeCalculation);
-            Assert.AreEqual(0, selfEmployeeCalculation.VatAmount);
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+            Assert.AreEqual(0, monthlySelfEmployeeCalculation.VatAmount);
         }
 
         [Test]
         public void CalculateVatAmount_SetZero_IfTaxVatRateLessOrEqualZero()
         {
-            SelfEmployeeCalculation selfEmployeeCalculation = new SelfEmployeeCalculation(CreataContext(vatRate: 0m));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(vatRate: 0m));
 
-            Assert.NotNull(selfEmployeeCalculation);
-            Assert.AreEqual(0, selfEmployeeCalculation.VatAmount);
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+            Assert.AreEqual(0, monthlySelfEmployeeCalculation.VatAmount);
         }
 
         [Test]
         public void CalcualteVatAmount_Success()
         {
-            SelfEmployeeCalculation selfEmployeeCalculation = new SelfEmployeeCalculation(CreataContext());
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
 
-            Assert.NotNull(selfEmployeeCalculation);
-            Assert.AreEqual(230m, selfEmployeeCalculation.VatAmount);
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+            Assert.AreEqual(230m, monthlySelfEmployeeCalculation.VatAmount);
+        }
+
+        [Test]
+        public void Ctor_SetInsuranceContribution_Success()
+        {
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
+
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+            Assert.NotNull(monthlySelfEmployeeCalculation.InsuranceContribution);
         }
 
     }

@@ -105,27 +105,27 @@ namespace SF.Tests.Domain
         }
 
         [Test]
-        public void InsuranceContributionsSum_ShouldReturnValue_Success()
+        public void InsuranceContributionsSum_ShouldReturnValueWithoutMedicalInsurance_Success()
         {
             var context = InsuranceContributionContextFactory.CreateWithPercentage();
             var insuranceContribution = new InsuranceContribution(context);
 
-            var insuranceContributionsSum = insuranceContribution.InsuranceContributionsSum();
+            var insuranceContributionsSum = insuranceContribution.InsuranceContributionsSum(false);
 
             Assert.NotNull(insuranceContribution);
             Assert.AreEqual(1166.85m, insuranceContributionsSum);
         }
 
         [Test]
-        public void ISocialInsuranceSum_ShouldReturnValue_Success()
+        public void SocialInsuranceSum_ShouldReturnValueWithMedicalInsurance_Success()
         {
             var context = InsuranceContributionContextFactory.CreateWithPercentage();
             var insuranceContribution = new InsuranceContribution(context);
 
-            var socialInsuranceSum = insuranceContribution.SocialInsuranceSum();
+            var socialInsuranceSum = insuranceContribution.InsuranceContributionsSum();
 
             Assert.NotNull(insuranceContribution);
-            Assert.AreEqual(846.91, socialInsuranceSum);
+            Assert.AreEqual(1232.16m, socialInsuranceSum);
         }
     }
 }
