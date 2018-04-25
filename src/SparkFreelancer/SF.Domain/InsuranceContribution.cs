@@ -32,12 +32,25 @@ namespace SF.Domain
 
         public decimal InsuranceContributionsSum(bool withMedicalInsurance = true)
         {
+
+            //TODO check values before calculating
             var baseContributionSum = (HealthInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance);
 
             if (withMedicalInsurance) baseContributionSum += MedicalInsurance;
 
             return Math.Round(baseContributionSum, 2);
         }
+
+        public decimal SocialInsuranceContributionSum(bool withMedicalInsurance = true)
+        {
+            var baseContributionSum = (DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance);
+
+            if (withMedicalInsurance) baseContributionSum += MedicalInsurance;
+
+            return Math.Round(baseContributionSum, 2);
+        }
+
+
 
         private void CalculateInsuranceParts(InsuranceContributionsPercentage insuranceContributionsPercentage)
         {

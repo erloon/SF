@@ -85,5 +85,49 @@ namespace SF.Tests.Domain
             Assert.NotNull(monthlySelfEmployeeCalculation.InsuranceContribution);
         }
 
+        [Test]
+        public void Ctor_ShouldReturnIncomeTaxZero_IfTaxBaseSumLessOrEqualZero()
+        {
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
+
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+            Assert.AreEqual(0, monthlySelfEmployeeCalculation.TaxAmount);
+        }
+
+        [Test]
+        public void Ctor_ShouldReturIncomTax_Success()
+        {
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+            Assert.AreEqual(1369, monthlySelfEmployeeCalculation.TaxAmount);
+        }
+
+        [Test]
+        public void Ctor_TaxAmountShouldBeRound()
+        {
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+            Assert.IsTrue((monthlySelfEmployeeCalculation.TaxAmount % 1) == 0);
+        }
+
+        [Test]
+        public void Ctor_CalcuateNetPay_Success()
+        {
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+
+            Assert.AreEqual(6964.15m,monthlySelfEmployeeCalculation.NetPay);
+        }
+
+        [Test]
+        public void Ctor_CalculateNetPayEstimate_Success()
+        {
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+            Assert.NotNull(monthlySelfEmployeeCalculation);
+
+            Assert.AreEqual(7464.15m, monthlySelfEmployeeCalculation.NetPayEstimate);
+        }
     }
 }

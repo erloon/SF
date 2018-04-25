@@ -8,12 +8,14 @@ namespace SF.Domain
     public class MonthlySelfEmployeeCalculation : Entity
     {
         public decimal NetPay { get; protected set; }
+        public decimal NetPayEstimate { get; protected set; }
         public decimal VatAmount { get; protected set; }
         public decimal IncomeCostsAmount { get; protected set; }
         public decimal TaxBaseAmount { get; protected set; }
-        public decimal BaseAmount { get; set; }
+        public decimal BaseAmount { get; protected set; }
         public decimal TaxAmount { get; protected set; }
         public decimal TaxDeductions { get; protected set; }
+        public decimal TaxRate { get; protected set; }
         public InsuranceContribution InsuranceContribution { get; protected set; }
 
         public MonthlySelfEmployeeCalculation(SelfEmployeeCalculationContext calculationContext)
@@ -28,10 +30,14 @@ namespace SF.Domain
             this.Id = Guid.NewGuid();
             this.TaxBaseAmount = calculationContext.BaseAmount;
             this.IncomeCostsAmount = calculationContext.IncomeCost;
+
+            SetTaxRate(calculationContext);
             CalculateVatAmount(calculationContext.VatRate);
             AddInsuranceContribution(calculationContext.InsuranceContributionContext);
             CalcualteMonthlyBaseAmount(calculationContext);
             CalculateIncomeTax(calculationContext);
+            CalculateNetPay(calculationContext);
+            CalculateNetPayEstimate(calculationContext);
         }
 
         private void CalculateVatAmount(decimal vatRate)
@@ -39,8 +45,8 @@ namespace SF.Domain
             if (vatRate < 0) throw new ArgumentOutOfRangeException(nameof(vatRate));
 
             if (this.TaxBaseAmount <= 0 || vatRate == 0) this.VatAmount = 0;
-
-            this.VatAmount = this.TaxBaseAmount * vatRate;
+            else
+                this.VatAmount = this.TaxBaseAmount * vatRate;
         }
 
         private void AddInsuranceContribution(InsuranceContributionContext insuranceContributionContext)
@@ -50,16 +56,37 @@ namespace SF.Domain
 
         private void CalcualteMonthlyBaseAmount(SelfEmployeeCalculationContext context)
         {
-            this.BaseAmount = this.TaxBaseAmount - this.IncomeCostsAmount -
-                              this.InsuranceContribution.InsuranceContributionsSum(context.IsMedicalInsurance);
+            this.BaseAmount = Math.Round(this.TaxBaseAmount - this.IncomeCostsAmount -
+                              this.InsuranceContribution.SocialInsuranceContributionSum(context.IsMedicalInsurance), 0);
         }
 
         private void CalculateIncomeTax(SelfEmployeeCalculationContext calculationContext)
         {
-            var currentBaseAmount = calculationContext.PreviusMonthsIncomes + this.BaseAmount;
-            var taxRate = calculationContext.GetIncomTaxRate.Invoke(calculationContext.TaxationForm, currentBaseAmount);
+            if (this.BaseAmount <= 0)
+                this.TaxAmount = 0;
+            else
+                this.TaxAmount = Math.Round((this.TaxRate * this.BaseAmount) - this.InsuranceContribution.HealthInsuranceDiscount, 0);
+        }
 
-            this.TaxAmount = taxRate * this.BaseAmount;
+        private void CalculateNetPay(SelfEmployeeCalculationContext context)
+        {
+            this.NetPay = this.TaxBaseAmount -
+                          this.InsuranceContribution.InsuranceContributionsSum(context.IsMedicalInsurance) -
+                          this.TaxAmount -
+                          this.IncomeCostsAmount;
+        }
+
+        private void CalculateNetPayEstimate(SelfEmployeeCalculationContext context)
+        {
+            this.NetPayEstimate = this.TaxBaseAmount -
+                                  this.InsuranceContribution.InsuranceContributionsSum(context.IsMedicalInsurance) -
+                                  this.TaxAmount;
+        }
+
+        private void SetTaxRate(SelfEmployeeCalculationContext context)
+        {
+            var currentBaseAmount = context.PreviusMonthsIncomes + this.BaseAmount;
+            this.TaxRate = context.GetIncomTaxRate.Invoke(context.TaxationForm, currentBaseAmount);
         }
     }
 }
