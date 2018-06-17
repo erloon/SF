@@ -4,6 +4,6 @@
     {
         GENERAL = 1,
         LINEAR = 2,
-        LUMPSUM = 3
+        FLAT = 3
     }
 }
