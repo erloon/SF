@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Tests", "SF.Tests\SF.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Infrastructure", "SF.Infrastructure\SF.Infrastructure.csproj", "{CAB1CA64-5DE3-4BB2-8C61-37CFD34B087B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.API", "SF.API\SF.API.csproj", "{E0575311-4D06-4B9D-91FE-818EF99D7414}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B172F897-09E1-4E9C-BC67-D5C1DDC112DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{CAB1CA64-5DE3-4BB2-8C61-37CFD34B087B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAB1CA64-5DE3-4BB2-8C61-37CFD34B087B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAB1CA64-5DE3-4BB2-8C61-37CFD34B087B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0575311-4D06-4B9D-91FE-818EF99D7414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0575311-4D06-4B9D-91FE-818EF99D7414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0575311-4D06-4B9D-91FE-818EF99D7414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0575311-4D06-4B9D-91FE-818EF99D7414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B172F897-09E1-4E9C-BC67-D5C1DDC112DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B172F897-09E1-4E9C-BC67-D5C1DDC112DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B172F897-09E1-4E9C-BC67-D5C1DDC112DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B172F897-09E1-4E9C-BC67-D5C1DDC112DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

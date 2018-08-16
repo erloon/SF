@@ -17,25 +17,44 @@ namespace SF.Domain.TaxCalculators
         public decimal Calculate(TaxCalculationContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
-
+            decimal taxValue = 0;
             List<IncomeTaxThreshold> incomeTaxThresholds = GetIncomeTaxThreshold();
 
             var currentValueIncomeTaxThreshold =
-                GetCurrentValueIncomeTaxThreshold(context.TotalIncomes, incomeTaxThresholds);
+                GetCurrentValueIncomeTaxThreshold(context, incomeTaxThresholds);
 
             if (IsLimitValueMonth(currentValueIncomeTaxThreshold, context))
             {
                 IncomeTaxThreshold nextThrashold = GetNextIncomeTaxThreshold(incomeTaxThresholds, currentValueIncomeTaxThreshold);
-                CalculateLimitValueForFirstMonth(currentValueIncomeTaxThreshold, prevoiusThrashold)
+                taxValue = CalculateForBorderMonth(context, currentValueIncomeTaxThreshold, nextThrashold);
+            }
+            else
+            {
+                taxValue = CalculateForFullMonth(currentValueIncomeTaxThreshold, context);
             }
 
+            return taxValue;
+        }
+
+        private decimal CalculateForFullMonth(IncomeTaxThreshold currentValueIncomeTaxThreshold, TaxCalculationContext context)
+        {
+            return context.CurrentIncome * currentValueIncomeTaxThreshold.Percentage;
+            //return ((context.TotalIncomes + context.CurrentIncome) - currentValueIncomeTaxThreshold.FromAmount) *
+            //       currentValueIncomeTaxThreshold.Percentage;
+        }
+
+        private decimal CalculateForBorderMonth(TaxCalculationContext context, IncomeTaxThreshold currentValueIncomeTaxThreshold, IncomeTaxThreshold nextThrashold)
+        {
+            decimal taxValue = (currentValueIncomeTaxThreshold.ToAmount - context.TotalIncomes) * currentValueIncomeTaxThreshold.Percentage;
+            var remainingValueForNextThreshold =((context.TotalIncomes + context.CurrentIncome) - nextThrashold.FromAmount) * currentValueIncomeTaxThreshold.Percentage;
+
+            return taxValue + remainingValueForNextThreshold;
         }
 
         private IncomeTaxThreshold GetNextIncomeTaxThreshold(List<IncomeTaxThreshold> incomeTaxThresholds,
             IncomeTaxThreshold currenTaxThreshold)
         {
-
-            return incomeTaxThresholds.First(x => x.ThresholdNumber == (currenTaxThreshold.ThresholdNumber + 1))
+            return incomeTaxThresholds.FirstOrDefault(x => x.ThresholdNumber == (currenTaxThreshold.ThresholdNumber + 1));
         }
 
         private bool IsLimitValueMonth(IncomeTaxThreshold currentValueIncomeTaxThreshold, TaxCalculationContext context)
@@ -47,12 +66,13 @@ namespace SF.Domain.TaxCalculators
 
         private List<IncomeTaxThreshold> GetIncomeTaxThreshold()
         {
-            throw new NotImplementedException();
+            return _taxPercentagesService.GetGeneralIncomeTaxThresholds();
         }
 
-        private IncomeTaxThreshold GetCurrentValueIncomeTaxThreshold(decimal totalIncomes, List<IncomeTaxThreshold> incomeTaxThresholds)
+        private IncomeTaxThreshold GetCurrentValueIncomeTaxThreshold(TaxCalculationContext context, List<IncomeTaxThreshold> incomeTaxThresholds)
         {
-            var retval = incomeTaxThresholds.FirstOrDefault(x => x.FromAmount <= totalIncomes && x.ToAmount < totalIncomes);
+            var value = (context.TotalIncomes + context.CurrentIncome);
+            var retval = incomeTaxThresholds.FirstOrDefault(x => x.FromAmount <= context.TotalIncomes && x.ToAmount >= value || x.ToAmount >= context.TotalIncomes);
             return retval;
         }
 

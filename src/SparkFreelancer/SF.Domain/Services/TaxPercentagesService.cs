@@ -4,7 +4,7 @@ namespace SF.Domain.Services
 {
     public class TaxPercentagesService : ITaxPercentagesService
     {
-        public decimal GetLinearRate()
+        public IncomeTaxThreshold GetLinearRate()
         {
             throw new System.NotImplementedException();
         }
@@ -14,7 +14,7 @@ namespace SF.Domain.Services
             throw new System.NotImplementedException();
         }
 
-        public List<int> GetFlatRates()
+        public List<IncomeTaxThreshold> GetFlatRates()
         {
             throw new System.NotImplementedException();
         }
