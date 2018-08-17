@@ -5,7 +5,7 @@ using SF.Infrastructure;
 
 namespace SF.Domain
 {
-    public class MonthlySelfEmployeeCalculation : Entity
+    public class MonthlySelfEmployeeCalculation  : Entity
     {
         public Month Month { get; protected set; }
         public decimal NetPay { get; protected set; }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using SF.Domain.DTO;
+using SF.Infrastructure;
 
 namespace SF.Domain
 {
-    public class SelfEmployeeCalculation
+    public class SelfEmployeeCalculation : Entity
     {
-        public Guid? Id { get; protected set; }
         public decimal TotalIncomes { get; protected set; }
         public decimal TotalCosts { get; protected set; }
 

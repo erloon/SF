@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SF.Infrastructure.Exceptions
+namespace SF.Infrastructure
 {
     public class DomainException : Exception
     {

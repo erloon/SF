@@ -74,16 +74,6 @@
     <Compile Include="Writables\WritableInsuranceContributionsPercentage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SF.Domain\SF.Domain.csproj">
-      <Project>{F9DE7A3D-3A39-4630-8D24-C07CDC8A9801}</Project>
-      <Name>SF.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SF.Infrastructure\SF.Infrastructure.csproj">
-      <Project>{CAB1CA64-5DE3-4BB2-8C61-37CFD34B087B}</Project>
-      <Name>SF.Infrastructure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

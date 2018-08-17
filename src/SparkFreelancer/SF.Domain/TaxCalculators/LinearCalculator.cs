@@ -1,7 +1,7 @@
 ﻿using System;
 using SF.Domain.DTO;
 using SF.Domain.Services;
-using SF.Infrastructure.Exceptions;
+using SF.Infrastructure;
 
 namespace SF.Domain.TaxCalculators
 {
