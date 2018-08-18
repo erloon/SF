@@ -1,4 +1,4 @@
-﻿namespace SF.API.Model
+﻿namespace SF.Domain.DTO.Results
 {
     public class InsuranceContributionResult
     {

@@ -1,10 +1,10 @@
 ﻿using SF.Domain;
 using SF.Domain.DTO;
-using SF.Tests.Writables;
+using SF.Test.Writables;
 
-namespace SF.Tests.Factories
+namespace SF.Test.Factories
 {
-    public class InsuranceContributionContextFactory
+    public static class InsuranceContributionContextFactory
     {
         private static decimal INSURANCEBASEAMOUNT = 2665.8m;
         private static decimal HEALTHBASEAMOUNT = 3554.93m;

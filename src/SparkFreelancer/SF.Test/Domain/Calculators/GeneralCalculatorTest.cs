@@ -7,9 +7,9 @@ using SF.Domain;
 using SF.Domain.DTO;
 using SF.Domain.Services;
 using SF.Domain.TaxCalculators;
-using SF.Tests.Writables;
+using SF.Test.Writables;
 
-namespace SF.Tests.Domain.Calculators
+namespace SF.Test.Domain.Calculators
 {
     [TestFixture]
     public class GeneralCalculatorTest
@@ -59,7 +59,7 @@ namespace SF.Tests.Domain.Calculators
         {
             _taxPercentagesService.Setup(x => x.GetGeneralIncomeTaxThresholds()).Returns(CreateThreshlds());
 
-          return  calculator.Calculate(context);
+            return calculator.Calculate(context);
         }
 
     }

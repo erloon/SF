@@ -1,9 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
 using SF.Domain;
-using SF.Tests.Factories;
+using SF.Test.Factories;
 
-namespace SF.Tests.Domain
+namespace SF.Test.Domain
 {
     [TestFixture]
     public class SelfEmployeeCalculationTest
@@ -14,8 +14,8 @@ namespace SF.Tests.Domain
             var calculation = new SelfEmployeeCalculation();
 
             Assert.NotNull(calculation);
-            Assert.AreEqual(0,calculation.TotalIncomes);
-            Assert.AreEqual(0,calculation.TotalCosts);
+            Assert.AreEqual(0, calculation.TotalIncomes);
+            Assert.AreEqual(0, calculation.TotalCosts);
             Assert.NotNull(calculation.Id);
             Assert.NotNull(calculation.Calculations);
         }
@@ -38,9 +38,9 @@ namespace SF.Tests.Domain
             calculation.Calculate(calculationContext);
 
             Assert.NotNull(calculation);
-            Assert.AreEqual(96000m,calculation.TotalIncomes);
+            Assert.AreEqual(96000m, calculation.TotalIncomes);
             Assert.AreEqual(12000m, calculation.TotalCosts);
-            Assert.AreEqual(12,calculation.Calculations.Count);
+            Assert.AreEqual(12, calculation.Calculations.Count);
         }
     }
 }

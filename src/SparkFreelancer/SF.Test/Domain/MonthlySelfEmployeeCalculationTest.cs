@@ -1,11 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using SF.Domain;
 using SF.Domain.DTO;
-using SF.Tests.Factories;
+using SF.Test.Factories;
 
-namespace SF.Tests.Domain
+namespace SF.Test.Domain
 {
     [TestFixture]
     public class MonthlySelfEmployeeCalculationTest
@@ -118,7 +117,7 @@ namespace SF.Tests.Domain
             SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
             Assert.NotNull(monthlySelfEmployeeCalculation);
 
-            Assert.AreEqual(6964.15m,monthlySelfEmployeeCalculation.NetPay);
+            Assert.AreEqual(6964.15m, monthlySelfEmployeeCalculation.NetPay);
         }
 
         [Test]

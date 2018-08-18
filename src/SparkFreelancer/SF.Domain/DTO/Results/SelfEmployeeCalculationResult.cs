@@ -1,6 +1,6 @@
-﻿namespace SF.API.Model
+﻿namespace SF.Domain.DTO.Results
 {
-    public class SelfEmployeeResult
+    public class SelfEmployeeCalculationResult
     {
         public decimal NetSalary { get; set; }
         public decimal GrossSalary { get; set; }

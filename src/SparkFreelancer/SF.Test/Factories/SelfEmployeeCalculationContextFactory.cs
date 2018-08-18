@@ -2,7 +2,7 @@
 using SF.Domain;
 using SF.Domain.DTO;
 
-namespace SF.Tests.Factories
+namespace SF.Test.Factories
 {
     public static class SelfEmployeeCalculationContextFactory
     {

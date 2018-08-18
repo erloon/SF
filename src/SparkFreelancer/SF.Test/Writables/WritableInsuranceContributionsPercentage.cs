@@ -1,8 +1,8 @@
 ﻿using SF.Domain;
 
-namespace SF.Tests.Writables
+namespace SF.Test.Writables
 {
-    public class WritableInsuranceContributionsPercentage: InsuranceContributionsPercentage
+    public class WritableInsuranceContributionsPercentage : InsuranceContributionsPercentage
     {
         public WritableInsuranceContributionsPercentage WithAccident(decimal accident)
         {

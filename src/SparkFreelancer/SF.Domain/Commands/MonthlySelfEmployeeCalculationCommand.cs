@@ -1,8 +1,9 @@
-﻿using SF.Domain;
+﻿using SF.Infrastructure;
+using SF.Infrastructure.CommandHandlerFramework;
 
-namespace SF.API.Model
+namespace SF.Domain.Commands
 {
-    public class MonthlySelfEmployee
+    public class MonthlySelfEmployeeCalculationCommand : ICommand
     {
         public decimal Salary { get; set; }
         public bool IsGross { get; set; }

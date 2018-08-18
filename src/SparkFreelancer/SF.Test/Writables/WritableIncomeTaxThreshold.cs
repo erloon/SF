@@ -1,6 +1,6 @@
 ﻿using SF.Domain;
 
-namespace SF.Tests.Writables
+namespace SF.Test.Writables
 {
     public class WritableIncomeTaxThreshold : IncomeTaxThreshold
     {

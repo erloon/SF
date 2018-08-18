@@ -2,21 +2,20 @@
 using NUnit.Framework;
 using SF.Domain;
 using SF.Domain.DTO;
-using SF.Tests.Factories;
-using SF.Tests.Writables;
+using SF.Test.Factories;
 
-namespace SF.Tests.Domain
+namespace SF.Test.Domain
 {
     [TestFixture]
     public class InsuranceContributionTest
     {
-        private decimal ACCIDENT = 0.018m;
-        private decimal HEALTH = 0.09m;
-        private decimal HEALTHTODISCOUNT = 0.0775m;
-        private decimal MEDICAL = 0.0245m;
-        private decimal DISABILITI = 0.08m;
-        private decimal LABORFOUND = 0.0245m;
-        private decimal RETIREMENT = 0.1952m;
+        //private decimal ACCIDENT = 0.018m;
+        //private decimal HEALTH = 0.09m;
+        //private decimal HEALTHTODISCOUNT = 0.0775m;
+        //private decimal MEDICAL = 0.0245m;
+        //private decimal DISABILITI = 0.08m;
+        //private decimal LABORFOUND = 0.0245m;
+        //private decimal RETIREMENT = 0.1952m;
 
         private decimal INSURANCEBASEAMOUNT = 2665.8m;
         private decimal HEALTHBASEAMOUNT = 3554.93m;
@@ -38,7 +37,7 @@ namespace SF.Tests.Domain
             Assert.NotNull(insuranceContribution);
             Assert.AreEqual(insuranceContribution.HealthBaseAmount, HEALTHBASEAMOUNT);
             Assert.AreEqual(insuranceContribution.InsuranceBaseAmount, INSURANCEBASEAMOUNT);
-            Assert.NotNull(insuranceContribution.Id);
+            //Assert.NotNull(insuranceContribution.Id);
         }
 
         [Test]

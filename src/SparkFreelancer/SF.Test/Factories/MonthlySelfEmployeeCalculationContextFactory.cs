@@ -2,9 +2,9 @@
 using SF.Domain;
 using SF.Domain.DTO;
 
-namespace SF.Tests.Factories
+namespace SF.Test.Factories
 {
-    public class MonthlySelfEmployeeCalculationContextFactory
+    public static class MonthlySelfEmployeeCalculationContextFactory
     {
         private const decimal BASEAMOUNT = 1000m;
         private const decimal VATRATE = 0.23m;
