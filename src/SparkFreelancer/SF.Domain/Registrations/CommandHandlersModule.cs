@@ -1,5 +1,8 @@
-﻿using Autofac;
+﻿using System.Collections.Generic;
+using Autofac;
+using MediatR;
 using SF.Domain.Commands;
+using SF.Domain.DTO.Results;
 using SF.Domain.Handlers;
 using SF.Infrastructure.CommandHandlerFramework;
 
@@ -9,10 +12,10 @@ namespace SF.Domain.Registrations
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder
-                .RegisterType<MonthlySelfEmployeeCalculationHandler>()
-                .As<ICommandHandler<MonthlySelfEmployeeCalculationCommand>>()
-                .InstancePerLifetimeScope();
+           
+            builder.RegisterType<SelfEmployeeCalculationHandler>()
+                .As<IRequestHandler<MonthlySelfEmployeeCalculationCommand, MonthlySelfEmployeeCalculationResult>>()
+                .InstancePerDependency();
             base.Load(builder);
         }
     }

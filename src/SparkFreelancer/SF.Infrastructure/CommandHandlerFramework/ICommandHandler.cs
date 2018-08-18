@@ -2,8 +2,8 @@
 
 namespace SF.Infrastructure.CommandHandlerFramework
 {
-    public interface ICommandHandler<in T> where T : ICommand
+    public interface ICommandHandler<in TCommand> where TCommand : ICommand
     {
-        Task ExecuteAsync(T command);
+        Task ExecuteAsync(TCommand command);
     }
 }

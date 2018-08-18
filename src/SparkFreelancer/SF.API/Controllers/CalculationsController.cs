@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SF.Domain.Commands;
+using SF.Domain.DTO.Results;
 using SF.Infrastructure.CommandHandlerFramework;
 
 namespace SF.API.Controllers
@@ -13,18 +15,23 @@ namespace SF.API.Controllers
     [ApiController]
     public class CalculationsController : ControllerBase
     {
-        private readonly ICommandDispatcher _commandDispatcher;
+        private readonly IMediator _mediator;
 
-        public CalculationsController(ICommandDispatcher commandDispatcher)
+        public CalculationsController(IMediator mediator)
         {
-            _commandDispatcher = commandDispatcher ?? throw new ArgumentNullException(nameof(commandDispatcher));
+           //_commandDispatcher = commandDispatcher ?? throw new ArgumentNullException(nameof(commandDispatcher));
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         [HttpPost]
-        public async Task<ActionResult> MonthlySelfEmployeeCalculation(MonthlySelfEmployeeCalculationCommand command)
+        public async Task<ActionResult<MonthlySelfEmployeeCalculationResult>> MonthlySelfEmployeeCalculation()
         {
-            await _commandDispatcher.DispatchAsync(command);
-            return new AcceptedResult();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            MonthlySelfEmployeeCalculationCommand command = new MonthlySelfEmployeeCalculationCommand();
+            return await _mediator.Send(command);
         }
     }
 }

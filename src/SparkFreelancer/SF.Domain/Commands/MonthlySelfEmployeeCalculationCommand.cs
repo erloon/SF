@@ -1,9 +1,11 @@
-﻿using SF.Infrastructure;
+﻿using MediatR;
+using SF.Domain.DTO.Results;
+using SF.Infrastructure;
 using SF.Infrastructure.CommandHandlerFramework;
 
 namespace SF.Domain.Commands
 {
-    public class MonthlySelfEmployeeCalculationCommand : ICommand
+    public class MonthlySelfEmployeeCalculationCommand : IRequest<MonthlySelfEmployeeCalculationResult>
     {
         public decimal Salary { get; set; }
         public bool IsGross { get; set; }
