@@ -68,7 +68,7 @@ namespace SF.API
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new MetiatrModule());
-            builder.RegisterModule(new CommandHandlersModule());
+            builder.RegisterModule(new DomainModule());
         }
     }
 }

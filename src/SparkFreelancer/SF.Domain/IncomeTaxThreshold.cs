@@ -17,5 +17,14 @@ namespace SF.Domain
                 return ToAmount * Percentage;
             }
         }
+
+        public IncomeTaxThreshold(TaxationForm taxationForm, int thresholdNumber, decimal fromAmount, decimal toAmount, decimal percentage)
+        {
+            TaxationForm = taxationForm;
+            ThresholdNumber = thresholdNumber;
+            FromAmount = fromAmount;
+            ToAmount = toAmount;
+            Percentage = percentage;
+        }
     }
 }

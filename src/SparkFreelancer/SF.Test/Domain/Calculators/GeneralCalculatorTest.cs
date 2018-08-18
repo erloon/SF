@@ -15,7 +15,7 @@ namespace SF.Test.Domain.Calculators
     public class GeneralCalculatorTest
     {
         private Mock<ITaxPercentagesService> _taxPercentagesService = null;
-        private GeneralCalculator calculator = null;
+        private GeneralCalculatorStrategy _calculatorStrategy = null;
         public List<IncomeTaxThreshold> CreateThreshlds()
         {
             return new List<IncomeTaxThreshold>()
@@ -45,13 +45,13 @@ namespace SF.Test.Domain.Calculators
         public void Setup()
         {
             _taxPercentagesService = new Mock<ITaxPercentagesService>(MockBehavior.Default);
-            calculator = new GeneralCalculator(_taxPercentagesService.Object);
+            _calculatorStrategy = new GeneralCalculatorStrategy(_taxPercentagesService.Object);
         }
 
         [Test]
         public void Calculate_ShouldThrowException_IfContextNull()
         {
-            Assert.Throws<ArgumentNullException>(() => calculator.Calculate(null));
+            Assert.Throws<ArgumentNullException>(() => _calculatorStrategy.Calculate(null));
         }
 
         [Test, TestCaseSource(typeof(TaxCalculationContextTestCaseFactory), "TestCases")]
@@ -59,7 +59,7 @@ namespace SF.Test.Domain.Calculators
         {
             _taxPercentagesService.Setup(x => x.GetGeneralIncomeTaxThresholds()).Returns(CreateThreshlds());
 
-            return calculator.Calculate(context);
+            return _calculatorStrategy.Calculate(context);
         }
 
     }
@@ -72,10 +72,10 @@ namespace SF.Test.Domain.Calculators
             {
                 yield return new TestCaseData(new TaxCalculationContext(0m, 8000m)).Returns(1440m);
                 yield return new TestCaseData(new TaxCalculationContext(80000m, 5528m)).Returns(995.04m);
-                yield return new TestCaseData(new TaxCalculationContext(80000m, 8000m)).Returns(995.04m);
-                yield return new TestCaseData(new TaxCalculationContext(85528.02m, 8000m)).Returns(995.04m);
-                yield return new TestCaseData(new TaxCalculationContext(100000m, 8000m)).Returns(995.04m);
-                yield return new TestCaseData(new TaxCalculationContext(150001, 8000m)).Returns(995.04m);
+                yield return new TestCaseData(new TaxCalculationContext(80000m, 8000m)).Returns(1786.08m);
+                yield return new TestCaseData(new TaxCalculationContext(85528.02m, 8000m)).Returns(2560m);
+                yield return new TestCaseData(new TaxCalculationContext(100000m, 8000m)).Returns(2560m);
+                yield return new TestCaseData(new TaxCalculationContext(150001, 8000m)).Returns(4000m);
             }
         }
     }

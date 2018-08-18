@@ -6,11 +6,11 @@ using SF.Domain.Services;
 
 namespace SF.Domain.TaxCalculators
 {
-    public class GeneralCalculator : ITaxCalculator
+    public class GeneralCalculatorStrategy : ITaxCalculatorStrategy
     {
         private readonly ITaxPercentagesService _taxPercentagesService;
 
-        public GeneralCalculator(ITaxPercentagesService taxPercentagesService)
+        public GeneralCalculatorStrategy(ITaxPercentagesService taxPercentagesService)
         {
             _taxPercentagesService = taxPercentagesService ?? throw new ArgumentNullException(nameof(taxPercentagesService));
         }
@@ -39,14 +39,12 @@ namespace SF.Domain.TaxCalculators
         private decimal CalculateForFullMonth(IncomeTaxThreshold currentValueIncomeTaxThreshold, TaxCalculationContext context)
         {
             return context.CurrentIncome * currentValueIncomeTaxThreshold.Percentage;
-            //return ((context.TotalIncomes + context.CurrentIncome) - currentValueIncomeTaxThreshold.FromAmount) *
-            //       currentValueIncomeTaxThreshold.Percentage;
         }
 
         private decimal CalculateForBorderMonth(TaxCalculationContext context, IncomeTaxThreshold currentValueIncomeTaxThreshold, IncomeTaxThreshold nextThrashold)
         {
             decimal taxValue = (currentValueIncomeTaxThreshold.ToAmount - context.TotalIncomes) * currentValueIncomeTaxThreshold.Percentage;
-            var remainingValueForNextThreshold =((context.TotalIncomes + context.CurrentIncome) - nextThrashold.FromAmount) * currentValueIncomeTaxThreshold.Percentage;
+            var remainingValueForNextThreshold =((context.TotalIncomes + context.CurrentIncome) - nextThrashold.FromAmount) * nextThrashold.Percentage;
 
             return taxValue + remainingValueForNextThreshold;
         }
@@ -60,8 +58,8 @@ namespace SF.Domain.TaxCalculators
         private bool IsLimitValueMonth(IncomeTaxThreshold currentValueIncomeTaxThreshold, TaxCalculationContext context)
         {
             var currentIncomesSum = context.TotalIncomes + context.CurrentIncome;
-            return currentIncomesSum > currentValueIncomeTaxThreshold.ToAmount &&
-                   context.TotalIncomes > currentValueIncomeTaxThreshold.FromAmount;
+            return currentIncomesSum > currentValueIncomeTaxThreshold.ToAmount
+                   && context.TotalIncomes > currentValueIncomeTaxThreshold.FromAmount;
         }
 
         private List<IncomeTaxThreshold> GetIncomeTaxThreshold()

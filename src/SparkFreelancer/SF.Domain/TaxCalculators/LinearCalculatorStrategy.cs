@@ -5,12 +5,12 @@ using SF.Infrastructure;
 
 namespace SF.Domain.TaxCalculators
 {
-    public class LinearCalculator : ITaxCalculator
+    public class LinearCalculatorStrategy : ITaxCalculatorStrategy
 
     {
         private readonly ITaxPercentagesService _taxPercentagesService;
 
-        public LinearCalculator(ITaxPercentagesService taxPercentagesService)
+        public LinearCalculatorStrategy(ITaxPercentagesService taxPercentagesService)
         {
             _taxPercentagesService = taxPercentagesService;
         }
