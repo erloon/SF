@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SF.Domain.Model;
 
 namespace SF.Domain.Services
 {

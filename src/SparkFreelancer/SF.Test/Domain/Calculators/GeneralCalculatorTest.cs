@@ -5,6 +5,7 @@ using Moq;
 using NUnit.Framework;
 using SF.Domain;
 using SF.Domain.DTO;
+using SF.Domain.Model;
 using SF.Domain.Services;
 using SF.Domain.TaxCalculators;
 using SF.Test.Writables;
@@ -70,12 +71,12 @@ namespace SF.Test.Domain.Calculators
         {
             get
             {
-                yield return new TestCaseData(new TaxCalculationContext(0m, 8000m)).Returns(1440m);
-                yield return new TestCaseData(new TaxCalculationContext(80000m, 5528m)).Returns(995.04m);
-                yield return new TestCaseData(new TaxCalculationContext(80000m, 8000m)).Returns(1786.08m);
-                yield return new TestCaseData(new TaxCalculationContext(85528.02m, 8000m)).Returns(2560m);
-                yield return new TestCaseData(new TaxCalculationContext(100000m, 8000m)).Returns(2560m);
-                yield return new TestCaseData(new TaxCalculationContext(150001, 8000m)).Returns(4000m);
+                yield return new TestCaseData(new TaxCalculationContext(0m, 8000m,TaxationForm.GENERAL)).Returns(1440m);
+                yield return new TestCaseData(new TaxCalculationContext(80000m, 5528m, TaxationForm.GENERAL)).Returns(995.04m);
+                yield return new TestCaseData(new TaxCalculationContext(80000m, 8000m, TaxationForm.GENERAL)).Returns(1786.08m);
+                yield return new TestCaseData(new TaxCalculationContext(85528.02m, 8000m, TaxationForm.GENERAL)).Returns(2560m);
+                yield return new TestCaseData(new TaxCalculationContext(100000m, 8000m, TaxationForm.GENERAL)).Returns(2560m);
+                yield return new TestCaseData(new TaxCalculationContext(150001, 8000m, TaxationForm.GENERAL)).Returns(4000m);
             }
         }
     }

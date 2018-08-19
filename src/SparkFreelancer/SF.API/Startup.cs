@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,7 @@ namespace SF.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info {Title = "SF API", Version = "v1"}));
-
+            services.AddAutoMapper();
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -56,6 +57,7 @@ namespace SF.API
                 app.UseHsts();
             }
 
+            
             //app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
@@ -70,5 +72,7 @@ namespace SF.API
             builder.RegisterModule(new MetiatrModule());
             builder.RegisterModule(new DomainModule());
         }
+
+       
     }
 }

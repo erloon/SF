@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SF.Domain.DTO;
 using SF.Infrastructure;
 
-namespace SF.Domain
+namespace SF.Domain.Model
 {
     public class SelfEmployeeCalculation : Entity
     {
@@ -39,7 +39,7 @@ namespace SF.Domain
             {
                 Month = (Month)i,
                 BaseAmount = GetMonthValues(context.Incomes,i),
-                GetIncomTaxRate = GetTaxRate,
+                //GetIncomTaxRate = GetTaxRate,
                 IncomeCost = GetMonthValues(context.Costs, i),
                 InsuranceContributionContext = context.InsuranceContributionContext,
                 IsMedicalInsurance = context.IsMedicalInsurance,

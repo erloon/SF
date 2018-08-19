@@ -1,5 +1,6 @@
 ﻿using System;
 using SF.Domain.DTO;
+using SF.Domain.Model;
 using SF.Domain.Services;
 using SF.Infrastructure;
 

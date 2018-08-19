@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SF.Domain.DTO;
+using SF.Domain.Model;
 using SF.Domain.Services;
 
 namespace SF.Domain.TaxCalculators

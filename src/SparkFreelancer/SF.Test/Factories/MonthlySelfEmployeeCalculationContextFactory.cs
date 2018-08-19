@@ -1,6 +1,7 @@
 ﻿using System;
 using SF.Domain;
 using SF.Domain.DTO;
+using SF.Domain.Model;
 
 namespace SF.Test.Factories
 {
@@ -18,7 +19,7 @@ namespace SF.Test.Factories
                 IncomeCost = incomeCost ?? INCOMECOSTAMOUNT,
                 VatRate = vatRate ?? VATRATE,
                 TaxationForm = taxationForm,
-                GetIncomTaxRate = getIncomTaxRate,
+                //GetIncomTaxRate = getIncomTaxRate,
                 InsuranceContributionContext = contributionContext ?? InsuranceContributionContextFactory.CreateWithPercentage()
             };
         }

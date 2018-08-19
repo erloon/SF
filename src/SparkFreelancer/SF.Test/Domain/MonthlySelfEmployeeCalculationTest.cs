@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using SF.Domain;
 using SF.Domain.DTO;
+using SF.Domain.Model;
 using SF.Test.Factories;
 
 namespace SF.Test.Domain
@@ -22,7 +23,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_SetParameters_Success()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext());
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
 
             Assert.NotNull(monthlySelfEmployeeCalculation.TaxBaseAmount);
             Assert.AreEqual(BASEAMOUNT, monthlySelfEmployeeCalculation.TaxBaseAmount);
@@ -32,26 +33,26 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_ThrowError_IfBaseAmountLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(baseAmount: -9m)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: -9m)));
 
         }
 
         [Test]
         public void Ctor_ThrowError_IfVatRateLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(vatRate: -8m)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new MonthlySelfEmployeeCalculation(CreataContext(vatRate: -8m)));
 
         }
         [Test]
         public void Ctor_ThrowError_IfIncomeCostAmountLessThanZero()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(incomeCost: -9m)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new MonthlySelfEmployeeCalculation(CreataContext(incomeCost: -9m)));
 
         }
         [Test]
         public void CalculateVatAmount_SetZero_IfTaxBaseAmountLessOrEqualZero()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 0m));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 0m));
 
             Assert.NotNull(monthlySelfEmployeeCalculation);
             Assert.AreEqual(0, monthlySelfEmployeeCalculation.VatAmount);
@@ -60,7 +61,7 @@ namespace SF.Test.Domain
         [Test]
         public void CalculateVatAmount_SetZero_IfTaxVatRateLessOrEqualZero()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(vatRate: 0m));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(vatRate: 0m));
 
             Assert.NotNull(monthlySelfEmployeeCalculation);
             Assert.AreEqual(0, monthlySelfEmployeeCalculation.VatAmount);
@@ -69,7 +70,7 @@ namespace SF.Test.Domain
         [Test]
         public void CalcualteVatAmount_Success()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext());
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
 
             Assert.NotNull(monthlySelfEmployeeCalculation);
             Assert.AreEqual(230m, monthlySelfEmployeeCalculation.VatAmount);
@@ -78,7 +79,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_SetInsuranceContribution_Success()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext());
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
 
             Assert.NotNull(monthlySelfEmployeeCalculation);
             Assert.NotNull(monthlySelfEmployeeCalculation.InsuranceContribution);
@@ -87,7 +88,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_ShouldReturnIncomeTaxZero_IfTaxBaseSumLessOrEqualZero()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext());
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext());
 
             Assert.NotNull(monthlySelfEmployeeCalculation);
             Assert.AreEqual(0, monthlySelfEmployeeCalculation.TaxAmount);
@@ -96,7 +97,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_ShouldReturIncomTax_Success()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
 
             Assert.NotNull(monthlySelfEmployeeCalculation);
             Assert.AreEqual(1369, monthlySelfEmployeeCalculation.TaxAmount);
@@ -105,7 +106,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_TaxAmountShouldBeRound()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
 
             Assert.NotNull(monthlySelfEmployeeCalculation);
             Assert.IsTrue((monthlySelfEmployeeCalculation.TaxAmount % 1) == 0);
@@ -114,7 +115,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_CalcuateNetPay_Success()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
             Assert.NotNull(monthlySelfEmployeeCalculation);
 
             Assert.AreEqual(6964.15m, monthlySelfEmployeeCalculation.NetPay);
@@ -123,7 +124,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_CalculateNetPayEstimate_Success()
         {
-            SF.Domain.MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new SF.Domain.MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
+            MonthlySelfEmployeeCalculation monthlySelfEmployeeCalculation = new MonthlySelfEmployeeCalculation(CreataContext(baseAmount: 10000));
             Assert.NotNull(monthlySelfEmployeeCalculation);
 
             Assert.AreEqual(7464.15m, monthlySelfEmployeeCalculation.NetPayEstimate);

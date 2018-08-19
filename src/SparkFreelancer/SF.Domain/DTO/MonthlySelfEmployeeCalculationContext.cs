@@ -1,4 +1,5 @@
 ﻿using System;
+using SF.Domain.Model;
 
 namespace SF.Domain.DTO
 {
@@ -11,7 +12,7 @@ namespace SF.Domain.DTO
         public bool IsMedicalInsurance { get; set; }
         public decimal PreviusMonthsIncomes { get; set; }
         public TaxationForm TaxationForm { get; set; }
-        public Func<TaxationForm, decimal, decimal> GetIncomTaxRate { get; set; }
+        public Func<TaxCalculationContext, decimal> IncomeTaxAmmount { get; set; }
         public InsuranceContributionContext InsuranceContributionContext { get; set; }
     }
 }

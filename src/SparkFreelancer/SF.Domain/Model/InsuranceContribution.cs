@@ -2,7 +2,7 @@
 using SF.Domain.DTO;
 using SF.Infrastructure;
 
-namespace SF.Domain
+namespace SF.Domain.Model
 {
     public class InsuranceContribution : Entity
     {

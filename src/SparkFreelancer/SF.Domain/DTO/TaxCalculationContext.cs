@@ -1,4 +1,6 @@
-﻿namespace SF.Domain.DTO
+﻿using SF.Domain.Model;
+
+namespace SF.Domain.DTO
 {
     public class TaxCalculationContext
     {

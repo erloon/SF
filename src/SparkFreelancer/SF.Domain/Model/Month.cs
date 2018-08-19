@@ -1,4 +1,4 @@
-﻿namespace SF.Domain
+﻿namespace SF.Domain.Model
 {
     public enum Month
     {

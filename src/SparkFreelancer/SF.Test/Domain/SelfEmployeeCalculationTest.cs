@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using SF.Domain;
+using SF.Domain.Model;
 using SF.Test.Factories;
 
 namespace SF.Test.Domain

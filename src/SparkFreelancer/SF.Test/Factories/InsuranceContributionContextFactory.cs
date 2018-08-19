@@ -1,5 +1,6 @@
 ﻿using SF.Domain;
 using SF.Domain.DTO;
+using SF.Domain.Model;
 using SF.Test.Writables;
 
 namespace SF.Test.Factories

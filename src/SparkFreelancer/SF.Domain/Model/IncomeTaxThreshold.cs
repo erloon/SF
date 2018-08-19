@@ -1,6 +1,6 @@
 ﻿using SF.Infrastructure;
 
-namespace SF.Domain
+namespace SF.Domain.Model
 {
     public class IncomeTaxThreshold : Entity
     {
@@ -18,6 +18,10 @@ namespace SF.Domain
             }
         }
 
+        public IncomeTaxThreshold()
+        {
+            
+        }            
         public IncomeTaxThreshold(TaxationForm taxationForm, int thresholdNumber, decimal fromAmount, decimal toAmount, decimal percentage)
         {
             TaxationForm = taxationForm;

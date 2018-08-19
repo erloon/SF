@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SF.Domain;
 using SF.Domain.DTO;
+using SF.Domain.Model;
 
 namespace SF.Test.Factories
 {

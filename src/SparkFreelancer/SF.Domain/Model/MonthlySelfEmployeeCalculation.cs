@@ -1,9 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using SF.Domain.DTO;
 using SF.Infrastructure;
 
-namespace SF.Domain
+namespace SF.Domain.Model
 {
     public class MonthlySelfEmployeeCalculation  : Entity
     {
@@ -88,7 +87,7 @@ namespace SF.Domain
         private void SetTaxRate(MonthlySelfEmployeeCalculationContext context)
         {
             var currentBaseAmount = context.PreviusMonthsIncomes + this.BaseAmount;
-            this.TaxRate = context.GetIncomTaxRate.Invoke(context.TaxationForm, currentBaseAmount);
+            //this.TaxRate = context.GetIncomTaxRate.Invoke(context.TaxationForm, currentBaseAmount);
         }
     }
 }
