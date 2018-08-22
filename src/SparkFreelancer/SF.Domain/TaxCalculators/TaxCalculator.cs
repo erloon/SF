@@ -16,7 +16,8 @@ namespace SF.Domain.TaxCalculators
 
         decimal ITaxCalculator.Calculate(TaxCalculationContext context)
         {
-            var calculator = _componentContext.ResolveKeyed<ITaxCalculatorStrategy>(context.TaxationForm);
+            ITaxCalculatorStrategy calculator = null;
+            calculator = _componentContext.ResolveKeyed<ITaxCalculatorStrategy>(context.TaxationForm);
 
             if (calculator == null) throw new DomainException($"Tax calculator for {context.TaxationForm} not found");
 

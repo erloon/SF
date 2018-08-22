@@ -5,6 +5,7 @@ using SF.Domain.Commands;
 using SF.Domain.DTO.Results;
 using SF.Domain.Handlers;
 using SF.Domain.Model;
+using SF.Domain.Services;
 using SF.Domain.TaxCalculators;
 using SF.Infrastructure.CommandHandlerFramework;
 
@@ -18,6 +19,10 @@ namespace SF.Domain.Registrations
             builder.RegisterType<SelfEmployeeCalculationHandler>()
                 .As<IRequestHandler<MonthlySelfEmployeeCalculationCommand, MonthlySelfEmployeeCalculation>>()
                 .InstancePerDependency();
+
+            builder.RegisterType<TaxPercentagesService>()
+                .As<ITaxPercentagesService>()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<TaxCalculator>()
                 .As<ITaxCalculator>()

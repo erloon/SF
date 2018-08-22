@@ -39,13 +39,12 @@ namespace SF.Domain.Model
             {
                 Month = (Month)i,
                 BaseAmount = GetMonthValues(context.Incomes,i),
-                //GetIncomTaxRate = GetTaxRate,
                 IncomeCost = GetMonthValues(context.Costs, i),
                 InsuranceContributionContext = context.InsuranceContributionContext,
                 IsMedicalInsurance = context.IsMedicalInsurance,
-                PreviusMonthsIncomes = this.TotalIncomes,
+                PreviusMonthsIncome = this.TotalIncomes,
                 TaxationForm = context.TaxationForm,
-                VatRate = context.VatRate
+
 
             };
         }

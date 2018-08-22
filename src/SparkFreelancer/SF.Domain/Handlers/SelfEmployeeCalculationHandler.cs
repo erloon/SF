@@ -41,7 +41,7 @@ namespace SF.Domain.Handlers
                     InsuranceBaseAmount = 2665.8m,
                     Percentage = new InsuranceContributionsPercentage()
                     {
-                        Accident = 0.018m,
+                        Accident = request.AccidentContributionPercentage,
                         Health = 0.09m,
                         Disabiliti = 0.08m,
                         HealthToDiscount = 0.0775m,
@@ -52,8 +52,9 @@ namespace SF.Domain.Handlers
                 },
                 IsMedicalInsurance = request.IsMedicalInsurance,
                 Month = (Month)DateTime.Today.Month,
-                PreviusMonthsIncomes = request.PreviusMonthsIncomes,
-                TaxationForm = request.TaxationForm
+                PreviusMonthsIncome = request.PreviusMonthsIncomes,
+                TaxationForm = request.TaxationForm,
+                IsGross = request.IsGross
             };
 
             return context;

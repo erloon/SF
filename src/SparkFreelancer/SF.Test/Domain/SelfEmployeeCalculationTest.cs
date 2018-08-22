@@ -29,19 +29,19 @@ namespace SF.Test.Domain
             Assert.Throws<ArgumentNullException>(() => calculation.Calculate(null));
         }
 
-        [Test]
-        public void Calculate_ShouldCreate_OneMonthlyCalculations()
-        {
-            var calculationContext = SelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL);
-            var calculation = new SelfEmployeeCalculation();
+        //[Test]
+        //public void Calculate_ShouldCreate_OneMonthlyCalculations()
+        //{
+        //    var calculationContext = SelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL);
+        //    var calculation = new SelfEmployeeCalculation();
 
 
-            calculation.Calculate(calculationContext);
+        //    calculation.Calculate(calculationContext);
 
-            Assert.NotNull(calculation);
-            Assert.AreEqual(96000m, calculation.TotalIncomes);
-            Assert.AreEqual(12000m, calculation.TotalCosts);
-            Assert.AreEqual(12, calculation.Calculations.Count);
-        }
+        //    Assert.NotNull(calculation);
+        //    Assert.AreEqual(96000m, calculation.TotalIncomes);
+        //    Assert.AreEqual(12000m, calculation.TotalCosts);
+        //    Assert.AreEqual(12, calculation.Calculations.Count);
+        //}
     }
 }

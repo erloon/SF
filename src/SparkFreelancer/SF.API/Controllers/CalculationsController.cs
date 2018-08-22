@@ -34,7 +34,8 @@ namespace SF.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var retval = _mapper.Map<MonthlySelfEmployeeCalculation>(await _mediator.Send(command));
+            var x = await _mediator.Send(command);
+            var retval = _mapper.Map<MonthlySelfEmployeeCalculation>(x);
             return Ok(retval);
         }
     }
