@@ -5,19 +5,19 @@ using SF.Infrastructure;
 
 namespace SF.Domain.Model
 {
-    public class SelfEmployeeCalculation : Entity
+    public class YearlySelfEmployeeCalculation : Entity
     {
         public decimal TotalIncomes { get; protected set; }
         public decimal TotalCosts { get; protected set; }
 
-        public List<MonthlySelfEmployeeCalculation> Calculations { get; protected set; }
+        public List<SelfEmployeeCalculation> Calculations { get; protected set; }
 
-        public SelfEmployeeCalculation()
+        public YearlySelfEmployeeCalculation()
         {
             this.Id = Guid.NewGuid();
             this.TotalIncomes = 0m;
             this.TotalCosts = 0m;
-            this.Calculations = new List<MonthlySelfEmployeeCalculation>();
+            this.Calculations = new List<SelfEmployeeCalculation>();
         }
 
         public void Calculate(SelfEmployeeCalculationContext context)
@@ -27,7 +27,7 @@ namespace SF.Domain.Model
             for (int i = 1; i <= 12; i++)
             {
                 var monthlyContext = CreateMonthlyContext(context, i);
-                this.Calculations.Add(new MonthlySelfEmployeeCalculation(monthlyContext));
+                this.Calculations.Add(new SelfEmployeeCalculation(monthlyContext));
                 AddCost(GetMonthValues(context.Costs,i));
                 AddIncome(GetMonthValues(context.Incomes,i));
             }

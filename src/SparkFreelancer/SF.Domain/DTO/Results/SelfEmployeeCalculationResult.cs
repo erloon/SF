@@ -1,6 +1,6 @@
 ﻿namespace SF.Domain.DTO.Results
 {
-    public class MonthlySelfEmployeeCalculationResult
+    public class SelfEmployeeCalculationResult
     {
         public decimal NetSalary { get; set; }
         public decimal NetSalaryEstimate { get; set; }

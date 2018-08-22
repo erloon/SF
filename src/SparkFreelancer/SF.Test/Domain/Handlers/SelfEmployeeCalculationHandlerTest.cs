@@ -25,7 +25,7 @@ namespace SF.Test.Domain.Handlers
         [Test]
         public async Task Handle_ShouldCalculateSalary_Success()
         {
-            var command = MonthlySelfEmployeeCalculationCommandFactory.CreateDefault();
+            var command = SelfEmployeeCalculationCommandFactory.CreateDefault();
 
             var retval = await _handler.Handle(command, CancellationToken.None);
 

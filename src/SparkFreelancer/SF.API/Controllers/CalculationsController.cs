@@ -27,7 +27,7 @@ namespace SF.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MonthlySelfEmployeeCalculation(MonthlySelfEmployeeCalculationCommand command)
+        public async Task<IActionResult> SelfEmployeeCalculation([FromBody]SelfEmployeeCalculationCommand command)
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace SF.API.Controllers
             }
 
             var x = await _mediator.Send(command);
-            var retval = _mapper.Map<MonthlySelfEmployeeCalculation>(x);
+            var retval = _mapper.Map<SelfEmployeeCalculation>(x);
             return Ok(retval);
         }
     }

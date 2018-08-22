@@ -17,7 +17,7 @@ namespace SF.Domain.Registrations
         {
 
             builder.RegisterType<SelfEmployeeCalculationHandler>()
-                .As<IRequestHandler<MonthlySelfEmployeeCalculationCommand, MonthlySelfEmployeeCalculation>>()
+                .As<IRequestHandler<SelfEmployeeCalculationCommand, SelfEmployeeCalculation>>()
                 .InstancePerDependency();
 
             builder.RegisterType<TaxPercentagesService>()

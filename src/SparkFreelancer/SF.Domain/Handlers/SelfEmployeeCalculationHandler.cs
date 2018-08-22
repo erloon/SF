@@ -12,7 +12,7 @@ using SF.Domain.TaxCalculators;
 
 namespace SF.Domain.Handlers
 {
-    public class SelfEmployeeCalculationHandler : IRequestHandler<MonthlySelfEmployeeCalculationCommand, MonthlySelfEmployeeCalculation>
+    public class SelfEmployeeCalculationHandler : IRequestHandler<SelfEmployeeCalculationCommand, SelfEmployeeCalculation>
     {
         private readonly ITaxCalculator _taxCalculator;
 
@@ -20,14 +20,14 @@ namespace SF.Domain.Handlers
         {
             _taxCalculator = taxCalculator ?? throw new ArgumentNullException(nameof(taxCalculator));
         }
-        public async Task<MonthlySelfEmployeeCalculation> Handle(MonthlySelfEmployeeCalculationCommand request, CancellationToken cancellationToken)
+        public async Task<SelfEmployeeCalculation> Handle(SelfEmployeeCalculationCommand request, CancellationToken cancellationToken)
         {
             var context = CreateMonthlySelfEmployeeCalculationContext(request);
-            MonthlySelfEmployeeCalculation calculation = new MonthlySelfEmployeeCalculation(context);
+            SelfEmployeeCalculation calculation = new SelfEmployeeCalculation(context);
             return await Task.FromResult(calculation);
         }
 
-        private MonthlySelfEmployeeCalculationContext CreateMonthlySelfEmployeeCalculationContext(MonthlySelfEmployeeCalculationCommand request)
+        private MonthlySelfEmployeeCalculationContext CreateMonthlySelfEmployeeCalculationContext(SelfEmployeeCalculationCommand request)
         {
             //TODO Load insuranceContributionContext from DB
             MonthlySelfEmployeeCalculationContext context = new MonthlySelfEmployeeCalculationContext()

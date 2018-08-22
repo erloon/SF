@@ -6,7 +6,7 @@ using SF.Infrastructure.CommandHandlerFramework;
 
 namespace SF.Domain.Commands
 {
-    public class MonthlySelfEmployeeCalculationCommand : IRequest<MonthlySelfEmployeeCalculation>
+    public class SelfEmployeeCalculationCommand : IRequest<SelfEmployeeCalculation>
     {
         public decimal Salary { get; set; }
         public bool IsGross { get; set; }

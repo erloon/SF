@@ -4,7 +4,7 @@ using SF.Infrastructure;
 
 namespace SF.Domain.Model
 {
-    public class MonthlySelfEmployeeCalculation : Entity
+    public class SelfEmployeeCalculation : Entity
     {
         public Month Month { get; protected set; }
         public decimal NetPay { get; protected set; }
@@ -19,7 +19,7 @@ namespace SF.Domain.Model
         private decimal _taxFreeAmount = 46.34m;
         public InsuranceContribution InsuranceContribution { get; protected set; }
 
-        public MonthlySelfEmployeeCalculation(MonthlySelfEmployeeCalculationContext calculationContext)
+        public SelfEmployeeCalculation(MonthlySelfEmployeeCalculationContext calculationContext)
         {
             if (calculationContext == null) throw new ArgumentNullException(nameof(calculationContext));
             if (calculationContext.BaseAmount < 0)
@@ -65,7 +65,10 @@ namespace SF.Domain.Model
             if (this.BaseAmount <= 0)
                 this.TaxAmount = 0;
             else
+            {
+                if (calculationContext.TaxationForm == TaxationForm.LINEAR) _taxFreeAmount = 0;
                 this.TaxAmount = Math.Round(calculationContext.IncomeTaxAmmount.Invoke(CreateTaxCalculationContext(calculationContext)) - (this.InsuranceContribution.HealthInsuranceDiscount + _taxFreeAmount), 0); //TODO move to db
+            }
         }
 
         private TaxCalculationContext CreateTaxCalculationContext(MonthlySelfEmployeeCalculationContext calculationContext)

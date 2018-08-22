@@ -12,7 +12,7 @@ namespace SF.Test.Domain
         [Test]
         public void Ctor_ShouldCreateProperties()
         {
-            var calculation = new SelfEmployeeCalculation();
+            var calculation = new YearlySelfEmployeeCalculation();
 
             Assert.NotNull(calculation);
             Assert.AreEqual(0, calculation.TotalIncomes);
@@ -24,7 +24,7 @@ namespace SF.Test.Domain
         [Test]
         public void Calcualte_ShouldThrowError_ifContextIsNull()
         {
-            var calculation = new SelfEmployeeCalculation();
+            var calculation = new YearlySelfEmployeeCalculation();
 
             Assert.Throws<ArgumentNullException>(() => calculation.Calculate(null));
         }
@@ -33,7 +33,7 @@ namespace SF.Test.Domain
         //public void Calculate_ShouldCreate_OneMonthlyCalculations()
         //{
         //    var calculationContext = SelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL);
-        //    var calculation = new SelfEmployeeCalculation();
+        //    var calculation = new YearlySelfEmployeeCalculation();
 
 
         //    calculation.Calculate(calculationContext);
