@@ -16,7 +16,7 @@ namespace SF.Test.Domain
 
         private MonthlySelfEmployeeCalculationContext CreataContext(decimal? baseAmount = null, decimal? incomeCost = null,bool? isGross = null,InsuranceContributionContext contributionContext = null)
         {
-            return MonthlySelfEmployeeCalculationContextFactory.Create(TaxationForm.LINEAR, null, baseAmount, incomeCost, isGross, contributionContext);
+            return MonthlySelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL, null, baseAmount, incomeCost, isGross, contributionContext);
         }
 
         [Test]
