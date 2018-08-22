@@ -36,6 +36,10 @@ namespace SF.Domain.Registrations
                 .Keyed<ITaxCalculatorStrategy>(TaxationForm.LINEAR)
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType<InsuranceContributionService>()
+                .As<IInsuranceContributionService>()
+                .InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }
