@@ -35,7 +35,7 @@ namespace SF.API.Controllers
             }
 
             var x = await _mediator.Send(command);
-            var retval = _mapper.Map<SelfEmployeeCalculation>(x);
+            var retval = _mapper.Map<SelfEmployeeCalculationResult>(x);
             return Ok(retval);
         }
     }

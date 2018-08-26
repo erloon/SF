@@ -14,7 +14,6 @@ namespace SF.Domain.Model
         public decimal TaxBaseAmount { get; protected set; }
         public decimal BaseAmount { get; protected set; }
         public decimal TaxAmount { get; protected set; }
-        public decimal TaxDeductions { get; protected set; }
         private decimal _vatTaxeRate = 0.23m;
         private decimal _taxFreeAmount = 46.34m;
         public InsuranceContribution InsuranceContribution { get; protected set; }
