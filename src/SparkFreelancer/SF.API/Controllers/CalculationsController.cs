@@ -38,5 +38,19 @@ namespace SF.API.Controllers
             var retval = _mapper.Map<SelfEmployeeCalculationResult>(x);
             return Ok(retval);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> YearlySelfEmployeeCalculation(
+            [FromBody] YearlySelfEmployeeCalculationCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var commandResult =  await _mediator.Send(command);
+            var retval = _mapper.Map<YearlySelfEmployeeCalculationResult>(commandResult);
+            return Ok(retval);
+        }
     }
 }
