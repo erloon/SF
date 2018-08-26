@@ -10,20 +10,9 @@ namespace SF.Test.Domain
     [TestFixture]
     public class InsuranceContributionTest
     {
-        //private decimal ACCIDENT = 0.018m;
-        //private decimal HEALTH = 0.09m;
-        //private decimal HEALTHTODISCOUNT = 0.0775m;
-        //private decimal MEDICAL = 0.0245m;
-        //private decimal DISABILITI = 0.08m;
-        //private decimal LABORFOUND = 0.0245m;
-        //private decimal RETIREMENT = 0.1952m;
-
         private decimal INSURANCEBASEAMOUNT = 2665.8m;
         private decimal HEALTHBASEAMOUNT = 3554.93m;
-
-
-
-
+        
         private InsuranceContributionContext CreateContext(decimal? healthBase = null, decimal? insuranceBaseAmount = null, InsuranceContributionsPercentage percentage = null)
         {
             return InsuranceContributionContextFactory.Create(healthBase, insuranceBaseAmount, percentage);
@@ -38,7 +27,6 @@ namespace SF.Test.Domain
             Assert.NotNull(insuranceContribution);
             Assert.AreEqual(insuranceContribution.HealthBaseAmount, HEALTHBASEAMOUNT);
             Assert.AreEqual(insuranceContribution.InsuranceBaseAmount, INSURANCEBASEAMOUNT);
-            //Assert.NotNull(insuranceContribution.Id);
         }
 
         [Test]
@@ -108,9 +96,11 @@ namespace SF.Test.Domain
         public void InsuranceContributionsSum_ShouldReturnValueWithoutMedicalInsurance_Success()
         {
             var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            context.IsMedicalInsurance = false;
             var insuranceContribution = new InsuranceContribution(context);
 
-            var insuranceContributionsSum = insuranceContribution.InsuranceContributionsSum(false);
+
+            var insuranceContributionsSum = insuranceContribution.InsuranceContributionsSum();
 
             Assert.NotNull(insuranceContribution);
             Assert.AreEqual(1166.85m, insuranceContributionsSum);
@@ -132,9 +122,10 @@ namespace SF.Test.Domain
         public void SocialInsuranceSum_ShouldReturnValueWithoutMedicalInsurance_Success()
         {
             var context = InsuranceContributionContextFactory.CreateWithPercentage();
+            context.IsMedicalInsurance = false;
             var insuranceContribution = new InsuranceContribution(context);
 
-            var socialInsuranceSum = insuranceContribution.SocialInsuranceContributionSum(false);
+            var socialInsuranceSum = insuranceContribution.SocialInsuranceContributionSum();
 
             Assert.NotNull(socialInsuranceSum);
             Assert.AreEqual(846.91m, socialInsuranceSum);

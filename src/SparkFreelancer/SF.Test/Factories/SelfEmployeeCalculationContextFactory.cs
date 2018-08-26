@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using SF.Domain;
 using SF.Domain.DTO;
 using SF.Domain.Model;
@@ -7,52 +7,21 @@ namespace SF.Test.Factories
 {
     public static class SelfEmployeeCalculationContextFactory
     {
-        private static Dictionary<Month, decimal> COSTS = new Dictionary<Month, decimal>()
-        {
-            {Month.JANUARY,1000m },
-            {Month.FEBRUARY,1000m },
-            {Month.MARCH,1000m },
-            {Month.APRIL,1000m },
-            {Month.MAY,1000m },
-            {Month.JUNE,1000m },
-            {Month.JULY,1000m },
-            {Month.AUGUST,1000m },
-            {Month.SEPTEMBER,1000m },
-            {Month.OCTOBER,1000m },
-            {Month.NOVEMBER,1000m },
-            {Month.DECEMBER,1000m }
-        };
+        private const decimal BASEAMOUNT = 1000m;
+        private const decimal INCOMECOSTAMOUNT = 500m;
+        private const decimal TAXAMOUNT = 1326M;
 
-        private static Dictionary<Month, decimal> INCOMES = new Dictionary<Month, decimal>()
-        {
-            {Month.JANUARY,8000m },
-            {Month.FEBRUARY,8000m },
-            {Month.MARCH,8000m },
-            {Month.APRIL,8000m },
-            {Month.MAY,8000m },
-            {Month.JUNE,8000m },
-            {Month.JULY,8000m },
-            {Month.AUGUST,8000m },
-            {Month.SEPTEMBER,8000m },
-            {Month.OCTOBER,8000m },
-            {Month.NOVEMBER,8000m },
-            {Month.DECEMBER,8000m }
-        };
-
-        private static decimal VAT = 0.23m;
-
-        public static SelfEmployeeCalculationContext Create(TaxationForm taxation, bool isMedicalInsurance = false,
-            Dictionary<Month, decimal> costs = null,
-            Dictionary<Month, decimal> incomes = null,
-            InsuranceContributionContext insuranceContributionContext = null)
+        public static SelfEmployeeCalculationContext Create(TaxationForm taxationForm, Func<TaxCalculationContext, decimal> getIncomeTaxAmmount = null, decimal? baseAmount = null,
+            decimal? incomeCost = null, bool? isGross = null, InsuranceContributionContext contributionContext = null)
         {
             return new SelfEmployeeCalculationContext()
             {
-                VatRate = VAT,
-                Costs = costs ?? COSTS,
-                Incomes = incomes ?? INCOMES,
-                InsuranceContributionContext = insuranceContributionContext ?? InsuranceContributionContextFactory.CreateWithPercentage(),
-                IsMedicalInsurance = isMedicalInsurance
+                BaseAmount = baseAmount ?? BASEAMOUNT,
+                IncomeCost = incomeCost ?? INCOMECOSTAMOUNT,
+                IncomeTaxAmmount = getIncomeTaxAmmount ?? new Func<TaxCalculationContext, decimal>((x) => TAXAMOUNT),
+                TaxationForm = taxationForm,
+                IsGross = isGross ?? false,
+                InsuranceContributionContext = contributionContext ?? InsuranceContributionContextFactory.CreateWithPercentage()
             };
         }
     }

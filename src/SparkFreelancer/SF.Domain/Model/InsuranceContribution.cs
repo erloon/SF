@@ -15,6 +15,7 @@ namespace SF.Domain.Model
         public decimal RetirementInsurance { get; protected set; } // emerytalne
         public decimal AccidentInsurance { get; protected set; } //wypadkowe
         public decimal LaborFoundInsurance { get; protected set; } // Składka na fundusz pracy
+        public bool WithMedicalInsurance { get; protected set; }
 
         protected InsuranceContribution() { }
         public InsuranceContribution(InsuranceContributionContext contributionContext)
@@ -24,28 +25,23 @@ namespace SF.Domain.Model
             if (contributionContext.Percentage == null) throw new ArgumentNullException(nameof(contributionContext.Percentage));
 
             this.Id = Guid.NewGuid();
+            this.WithMedicalInsurance = contributionContext.IsMedicalInsurance;
             this.InsuranceBaseAmount = contributionContext.InsuranceBaseAmount;
             this.HealthBaseAmount = contributionContext.HealthBaseAmount;
 
             CalculateInsuranceParts(contributionContext.Percentage);
         }
 
-        public decimal InsuranceContributionsSum(bool withMedicalInsurance = true)
+        public decimal InsuranceContributionsSum()
         {
-
-            //TODO check values before calculating
-            var baseContributionSum = (HealthInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance);
-
-            if (withMedicalInsurance) baseContributionSum += MedicalInsurance;
+            var baseContributionSum = (HealthInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance + MedicalInsurance);
 
             return Math.Round(baseContributionSum, 2);
         }
 
-        public decimal SocialInsuranceContributionSum(bool withMedicalInsurance = true)
+        public decimal SocialInsuranceContributionSum()
         {
-            var baseContributionSum = (DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance);
-
-            if (withMedicalInsurance) baseContributionSum += MedicalInsurance;
+            var baseContributionSum = (DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance + MedicalInsurance);
 
             return Math.Round(baseContributionSum, 2);
         }
@@ -55,11 +51,13 @@ namespace SF.Domain.Model
         private void CalculateInsuranceParts(InsuranceContributionsPercentage insuranceContributionsPercentage)
         {
             CalculateHealthInsurance(insuranceContributionsPercentage, this.HealthBaseAmount);
-            CalculateMedicalInsurance(insuranceContributionsPercentage.Medical, this.InsuranceBaseAmount);
             CalculateDisabilitiInsurance(insuranceContributionsPercentage.Disabiliti, this.InsuranceBaseAmount);
             CalculateRetirementInsurance(insuranceContributionsPercentage.Retirement, this.InsuranceBaseAmount);
             CalculateAccidentInsurance(insuranceContributionsPercentage.Accident, this.InsuranceBaseAmount);
             CalculatLaborFoundInsurance(insuranceContributionsPercentage.LaborFound, this.InsuranceBaseAmount);
+
+            if (this.WithMedicalInsurance) CalculateMedicalInsurance(insuranceContributionsPercentage.Medical, this.InsuranceBaseAmount);
+
         }
 
         private void CalculatLaborFoundInsurance(decimal laborFound, decimal insuranceBaseAmount)

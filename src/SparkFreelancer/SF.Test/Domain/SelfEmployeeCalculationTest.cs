@@ -32,7 +32,7 @@ namespace SF.Test.Domain
         //[Test]
         //public void Calculate_ShouldCreate_OneMonthlyCalculations()
         //{
-        //    var calculationContext = SelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL);
+        //    var calculationContext = YearlySelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL);
         //    var calculation = new YearlySelfEmployeeCalculation();
 
 

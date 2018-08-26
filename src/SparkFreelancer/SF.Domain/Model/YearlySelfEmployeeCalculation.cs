@@ -20,7 +20,7 @@ namespace SF.Domain.Model
             this.Calculations = new List<SelfEmployeeCalculation>();
         }
 
-        public void Calculate(SelfEmployeeCalculationContext context)
+        public void Calculate(YearlySelfEmployeeCalculationContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
@@ -33,9 +33,9 @@ namespace SF.Domain.Model
             }
         }
 
-        private MonthlySelfEmployeeCalculationContext CreateMonthlyContext(SelfEmployeeCalculationContext context, int i)
+        private SelfEmployeeCalculationContext CreateMonthlyContext(YearlySelfEmployeeCalculationContext context, int i)
         {
-            return new MonthlySelfEmployeeCalculationContext()
+            return new SelfEmployeeCalculationContext()
             {
                 Month = (Month)i,
                 BaseAmount = GetMonthValues(context.Incomes,i),

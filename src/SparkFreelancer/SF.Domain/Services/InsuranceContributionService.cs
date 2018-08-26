@@ -5,7 +5,7 @@ namespace SF.Domain.Services
 {
     public class InsuranceContributionService : IInsuranceContributionService
     {
-        public InsuranceContributionContext Get(decimal accidentContributionPercentage)
+        public InsuranceContributionContext Get(decimal accidentContributionPercentage, bool withMedical)
         {
             return new InsuranceContributionContext()
             {
@@ -20,11 +20,12 @@ namespace SF.Domain.Services
                     LaborFound = 0.0245m,
                     Medical = 0.0245m,
                     Retirement = 0.1952m
-                }
+                },
+                IsMedicalInsurance = withMedical
             };
         }
 
-        public InsuranceContributionContext GetWithDicount(decimal accidentContributionPercentage)
+        public InsuranceContributionContext GetWithDicount(decimal accidentContributionPercentage,  bool withMedical)
         {
             return new InsuranceContributionContext()
             {
@@ -39,7 +40,8 @@ namespace SF.Domain.Services
                     LaborFound = 0.0245m,
                     Medical = 0.0245m,
                     Retirement = 0.1952m
-                }
+                },
+                IsMedicalInsurance = withMedical
             };
         }
     }

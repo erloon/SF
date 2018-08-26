@@ -53,9 +53,9 @@ namespace SF.Test.Domain.Handlers
             var command = SelfEmployeeCalculationCommandFactory.CreateDefault();
             var context = CreateInsuranceContributionContext(command);
 
-            _insuranceContributionService.Setup(x => x.GetWithDicount(It.IsAny<decimal>()))
+            _insuranceContributionService.Setup(x => x.GetWithDicount(It.IsAny<decimal>(), It.IsAny<bool>()))
                 .Returns(context);
-            _insuranceContributionService.Setup(x => x.Get(It.IsAny<decimal>()))
+            _insuranceContributionService.Setup(x => x.Get(It.IsAny<decimal>(), It.IsAny<bool>()))
                 .Returns(context);
 
 

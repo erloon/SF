@@ -14,9 +14,9 @@ namespace SF.Test.Domain
         private const decimal INCOMECOSTAMOUNT = 500m;
 
 
-        private MonthlySelfEmployeeCalculationContext CreataContext(decimal? baseAmount = null, decimal? incomeCost = null,bool? isGross = null,InsuranceContributionContext contributionContext = null)
+        private SelfEmployeeCalculationContext CreataContext(decimal? baseAmount = null, decimal? incomeCost = null,bool? isGross = null,InsuranceContributionContext contributionContext = null)
         {
-            return MonthlySelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL, null, baseAmount, incomeCost, isGross, contributionContext);
+            return SelfEmployeeCalculationContextFactory.Create(TaxationForm.GENERAL, null, baseAmount, incomeCost, isGross, contributionContext);
         }
 
         [Test]
@@ -86,7 +86,7 @@ namespace SF.Test.Domain
             SelfEmployeeCalculation selfEmployeeCalculation = new SelfEmployeeCalculation(CreataContext(baseAmount: 10000));
 
             Assert.NotNull(selfEmployeeCalculation);
-            Assert.AreEqual(1326m, selfEmployeeCalculation.TaxAmount);
+            Assert.AreEqual(1004m, selfEmployeeCalculation.TaxAmount);
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace SF.Test.Domain
             SelfEmployeeCalculation selfEmployeeCalculation = new SelfEmployeeCalculation(CreataContext(baseAmount: 10000));
             Assert.NotNull(selfEmployeeCalculation);
 
-            Assert.AreEqual(7007.15m, selfEmployeeCalculation.NetPay);
+            Assert.AreEqual(7263.84m, selfEmployeeCalculation.NetPay);
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace SF.Test.Domain
             SelfEmployeeCalculation selfEmployeeCalculation = new SelfEmployeeCalculation(CreataContext(baseAmount: 10000));
             Assert.NotNull(selfEmployeeCalculation);
 
-            Assert.AreEqual(7507.15m, selfEmployeeCalculation.NetPayEstimate);
+            Assert.AreEqual(7763.84, selfEmployeeCalculation.NetPayEstimate);
         }
     }
 }

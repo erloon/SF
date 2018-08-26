@@ -7,16 +7,17 @@ namespace SF.Test.Factories
 {
     public static class InsuranceContributionContextFactory
     {
-        private static decimal INSURANCEBASEAMOUNT = 2665.8m;
-        private static decimal HEALTHBASEAMOUNT = 3554.93m;
+        private const decimal INSURANCEBASEAMOUNT = 2665.8m;
+        private const decimal HEALTHBASEAMOUNT = 3554.93m;
 
-        private static decimal ACCIDENT = 0.018m;
-        private static decimal HEALTH = 0.09m;
-        private static decimal HEALTHTODISCOUNT = 0.0775m;
-        private static decimal MEDICAL = 0.0245m;
-        private static decimal DISABILITI = 0.08m;
-        private static decimal LABORFOUND = 0.0245m;
-        private static decimal RETIREMENT = 0.1952m;
+        private const decimal ACCIDENT = 0.018m;
+        private const decimal HEALTH = 0.09m;
+        private const decimal HEALTHTODISCOUNT = 0.0775m;
+        private const decimal MEDICAL = 0.0245m;
+        private const decimal DISABILITI = 0.08m;
+        private const decimal LABORFOUND = 0.0245m;
+        private const decimal RETIREMENT = 0.1952m;
+        private const bool WITHMEDICAL = true;
 
         public static InsuranceContributionContext Create(decimal? healthBase = null, decimal? insuranceBaseAmount = null, InsuranceContributionsPercentage percentage = null)
         {
@@ -34,7 +35,8 @@ namespace SF.Test.Factories
             {
                 HealthBaseAmount = healthBase ?? HEALTHBASEAMOUNT,
                 InsuranceBaseAmount = insuranceBaseAmount ?? INSURANCEBASEAMOUNT,
-                Percentage = percentage ?? CreateInsuranceContributionsPercentage()
+                Percentage = percentage ?? CreateInsuranceContributionsPercentage(),
+                IsMedicalInsurance = WITHMEDICAL
             };
         }
         private static InsuranceContributionsPercentage CreateInsuranceContributionsPercentage()

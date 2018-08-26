@@ -19,7 +19,7 @@ namespace SF.Domain.Model
         private decimal _taxFreeAmount = 46.34m;
         public InsuranceContribution InsuranceContribution { get; protected set; }
 
-        public SelfEmployeeCalculation(MonthlySelfEmployeeCalculationContext calculationContext)
+        public SelfEmployeeCalculation(SelfEmployeeCalculationContext calculationContext)
         {
             if (calculationContext == null) throw new ArgumentNullException(nameof(calculationContext));
             if (calculationContext.BaseAmount < 0)
@@ -40,7 +40,7 @@ namespace SF.Domain.Model
             CalculateNetPayEstimate(calculationContext);
         }
 
-        private void CalculateVatAmount(MonthlySelfEmployeeCalculationContext calculationContext)
+        private void CalculateVatAmount(SelfEmployeeCalculationContext calculationContext)
         {
             //TODO Add vat rate to command and context
             if (calculationContext.IsGross)
@@ -54,13 +54,13 @@ namespace SF.Domain.Model
             this.InsuranceContribution = new InsuranceContribution(insuranceContributionContext);
         }
 
-        private void CalcualteMonthlyBaseAmount(MonthlySelfEmployeeCalculationContext context)
+        private void CalcualteMonthlyBaseAmount(SelfEmployeeCalculationContext context)
         {
             this.BaseAmount = Math.Round(this.TaxBaseAmount - this.IncomeCostsAmount -
-                              this.InsuranceContribution.SocialInsuranceContributionSum(context.IsMedicalInsurance), 0);
+                              this.InsuranceContribution.SocialInsuranceContributionSum(), 0);
         }
 
-        private void CalculateIncomeTax(MonthlySelfEmployeeCalculationContext calculationContext)
+        private void CalculateIncomeTax(SelfEmployeeCalculationContext calculationContext)
         {
             if (this.BaseAmount <= 0)
                 this.TaxAmount = 0;
@@ -71,23 +71,23 @@ namespace SF.Domain.Model
             }
         }
 
-        private TaxCalculationContext CreateTaxCalculationContext(MonthlySelfEmployeeCalculationContext calculationContext)
+        private TaxCalculationContext CreateTaxCalculationContext(SelfEmployeeCalculationContext calculationContext)
         {
             return new TaxCalculationContext(calculationContext.PreviusMonthsIncome, this.BaseAmount, calculationContext.TaxationForm);
         }
 
-        private void CalculateNetPay(MonthlySelfEmployeeCalculationContext context)
+        private void CalculateNetPay(SelfEmployeeCalculationContext context)
         {
             this.NetPay = this.TaxBaseAmount -
-                          this.InsuranceContribution.InsuranceContributionsSum(context.IsMedicalInsurance) -
+                          this.InsuranceContribution.InsuranceContributionsSum() -
                           this.TaxAmount -
                           this.IncomeCostsAmount;
         }
 
-        private void CalculateNetPayEstimate(MonthlySelfEmployeeCalculationContext context)
+        private void CalculateNetPayEstimate(SelfEmployeeCalculationContext context)
         {
             this.NetPayEstimate = this.TaxBaseAmount -
-                                  this.InsuranceContribution.InsuranceContributionsSum(context.IsMedicalInsurance) -
+                                  this.InsuranceContribution.InsuranceContributionsSum() -
                                   this.TaxAmount;
         }
     }

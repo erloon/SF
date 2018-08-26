@@ -6,6 +6,7 @@ namespace SF.Domain.DTO
     {
         public decimal InsuranceBaseAmount { get; set; }
         public decimal HealthBaseAmount { get; set; }
+        public bool IsMedicalInsurance { get; set; }
         public InsuranceContributionsPercentage Percentage { get; set; }
     }
 }

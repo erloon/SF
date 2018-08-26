@@ -5,7 +5,7 @@ namespace SF.Domain.Services
 {
     public interface IInsuranceContributionService
     {
-        InsuranceContributionContext Get(decimal accidentContributionPercentage);
-        InsuranceContributionContext GetWithDicount(decimal accidentContributionPercentage);
+        InsuranceContributionContext Get(decimal accidentContributionPercentage,  bool withMedical);
+        InsuranceContributionContext GetWithDicount(decimal accidentContributionPercentage,  bool withMedical);
     }
 }
