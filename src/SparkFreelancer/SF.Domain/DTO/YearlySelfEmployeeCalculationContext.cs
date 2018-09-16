@@ -1,15 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SF.Domain.Model;
 
 namespace SF.Domain.DTO
 {
     public class YearlySelfEmployeeCalculationContext
     {
-        public decimal VatRate { get; set; }
-        public Dictionary<Month, decimal> Costs { get; set; }
-        public Dictionary<Month, decimal> Incomes { get; set; }
+        public bool IsGross { get; set; }
+        public decimal AccidentContributionPercentage { get; set; }
+        public bool IsMedicalInsurance { get; set; }
+        public bool IsReliefForSocialInsurance { get; set; }
         public TaxationForm TaxationForm { get; set; }
         public InsuranceContributionContext InsuranceContributionContext { get; set; }
-        public bool IsMedicalInsurance { get; set; }
+        public Func<TaxCalculationContext, decimal> IncomeTaxAmmount { get; set; }
+        public List<MonthlyBalanceSheetData> MonthlyBalanceSheetDatas { get; set; }
     }
 }

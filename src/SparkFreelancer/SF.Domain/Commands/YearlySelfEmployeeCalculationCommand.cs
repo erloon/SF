@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MediatR;
 using SF.Domain.DTO;
+using SF.Domain.DTO.Results;
 using SF.Domain.Model;
 
 namespace SF.Domain.Commands
@@ -14,5 +16,8 @@ namespace SF.Domain.Commands
         public TaxationForm TaxationForm { get; set; }
 
         public List<MonthlyBalanceSheetData> MonthlyBalanceSheetDatas { get; set; }
+
+
     }
+
 }

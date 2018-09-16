@@ -43,9 +43,9 @@ namespace SF.Domain.Model
         {
             //TODO Add vat rate to command and context
             if (calculationContext.IsGross)
-                this.VatAmount = (calculationContext.BaseAmount - (calculationContext.BaseAmount / (1 + _vatTaxeRate)));
+                this.VatAmount =  Math.Round((calculationContext.BaseAmount - (calculationContext.BaseAmount / (1 + _vatTaxeRate))),2);
             else
-                this.VatAmount = calculationContext.BaseAmount * _vatTaxeRate;
+                this.VatAmount = Math.Round((calculationContext.BaseAmount * _vatTaxeRate),2);
         }
 
         private void AddInsuranceContribution(InsuranceContributionContext insuranceContributionContext)

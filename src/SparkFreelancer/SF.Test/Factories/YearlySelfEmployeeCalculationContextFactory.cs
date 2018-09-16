@@ -48,11 +48,11 @@ namespace SF.Test.Factories
         {
             return new YearlySelfEmployeeCalculationContext()
             {
-                VatRate = VAT,
-                Costs = costs ?? COSTS,
-                Incomes = incomes ?? INCOMES,
-                InsuranceContributionContext = insuranceContributionContext ?? InsuranceContributionContextFactory.CreateWithPercentage(),
-                IsMedicalInsurance = isMedicalInsurance
+                //VatRate = VAT,
+                //Costs = costs ?? COSTS,
+                //Incomes = incomes ?? INCOMES,
+                //InsuranceContributionContext = insuranceContributionContext ?? InsuranceContributionContextFactory.CreateWithPercentage(),
+                //IsMedicalInsurance = isMedicalInsurance
             };
         }
     }

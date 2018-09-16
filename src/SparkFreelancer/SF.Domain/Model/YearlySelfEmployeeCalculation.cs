@@ -12,77 +12,47 @@ namespace SF.Domain.Model
 
         public List<SelfEmployeeCalculation> Calculations { get; protected set; }
 
-        public YearlySelfEmployeeCalculation()
+        public YearlySelfEmployeeCalculation(YearlySelfEmployeeCalculationContext context)
         {
             this.Id = Guid.NewGuid();
             this.TotalIncomes = 0m;
             this.TotalCosts = 0m;
             this.Calculations = new List<SelfEmployeeCalculation>();
+            Calculate(context);
         }
 
-        public void Calculate(YearlySelfEmployeeCalculationContext context)
+        private void Calculate(YearlySelfEmployeeCalculationContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
-            for (int i = 1; i <= 12; i++)
+            foreach (var monthlyBalanceSheetData in context.MonthlyBalanceSheetDatas)
             {
-                var monthlyContext = CreateMonthlyContext(context, i);
-                this.Calculations.Add(new SelfEmployeeCalculation(monthlyContext));
-                AddCost(GetMonthValues(context.Costs,i));
-                AddIncome(GetMonthValues(context.Incomes,i));
+                var monthlyContext = CreateMonthlyContext(context, monthlyBalanceSheetData);
+                var calculation = new SelfEmployeeCalculation(monthlyContext);
+
+                this.TotalIncomes += calculation.BaseAmount;
+                this.TotalCosts += calculation.IncomeCostsAmount;
+
+                this.Calculations.Add(calculation);
             }
         }
 
-        private SelfEmployeeCalculationContext CreateMonthlyContext(YearlySelfEmployeeCalculationContext context, int i)
+        private SelfEmployeeCalculationContext CreateMonthlyContext(YearlySelfEmployeeCalculationContext context, MonthlyBalanceSheetData monthlyBalanceSheetData)
         {
             return new SelfEmployeeCalculationContext()
             {
-                Month = (Month)i,
-                BaseAmount = GetMonthValues(context.Incomes,i),
-                IncomeCost = GetMonthValues(context.Costs, i),
+                Month = monthlyBalanceSheetData.Month,
+                BaseAmount = monthlyBalanceSheetData.Salary,
+                IsGross = context.IsGross,
+                IncomeCost = monthlyBalanceSheetData.IncomeCosts,
                 InsuranceContributionContext = context.InsuranceContributionContext,
                 IsMedicalInsurance = context.IsMedicalInsurance,
                 PreviusMonthsIncome = this.TotalIncomes,
                 TaxationForm = context.TaxationForm,
-
-
+                IncomeTaxAmmount = context.IncomeTaxAmmount
             };
         }
 
-        decimal GetMonthValues(Dictionary<Month, decimal> values, int month)
-        {
-            decimal income = 0;
-            values.TryGetValue((Month)month, out income);
-            return income;
-        }
 
-        private void AddIncome(decimal income)
-        {
-            this.TotalIncomes += income;
-        }
-
-        private void AddCost(decimal cost)
-        {
-            this.TotalCosts += cost;
-        }
-
-        private decimal GetTaxRate(TaxationForm taxation, decimal baseAmount)
-        {
-            if (taxation == TaxationForm.GENERAL)
-                return GetGeneralTaxRate(baseAmount);
-            return GetLinearTaxRate();
-        }
-
-        private decimal GetLinearTaxRate()
-        {
-            return 0.19m;
-        }
-
-        private decimal GetGeneralTaxRate(decimal baseAmount)
-        {
-            if (baseAmount < 85528)
-                return 0.18m;
-            else return 0.32m;
-        }
     }
 }

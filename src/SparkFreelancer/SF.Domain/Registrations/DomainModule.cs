@@ -20,6 +20,10 @@ namespace SF.Domain.Registrations
                 .As<IRequestHandler<SelfEmployeeCalculationCommand, SelfEmployeeCalculation>>()
                 .InstancePerDependency();
 
+            builder.RegisterType<YearlySelfEmployeeCalculationHandler>()
+                .As<IRequestHandler<YearlySelfEmployeeCalculationCommand, YearlySelfEmployeeCalculation>>()
+                .InstancePerDependency();
+
             builder.RegisterType<TaxPercentagesService>()
                 .As<ITaxPercentagesService>()
                 .InstancePerLifetimeScope();

@@ -49,7 +49,16 @@ namespace SF.API.Controllers
             }
 
             var commandResult =  await _mediator.Send(command);
-            var retval = _mapper.Map<YearlySelfEmployeeCalculationResult>(commandResult);
+            YearlySelfEmployeeCalculationResult retval;
+            try
+            {
+                retval = _mapper.Map<YearlySelfEmployeeCalculationResult>(commandResult);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+           
             return Ok(retval);
         }
     }
