@@ -29,14 +29,14 @@ namespace SF.Tests.API.Controllers
         public async Task MonthlySelfEmployeeCalculation_ShouldReturnResult_Success()
         {
             var controller = new CalculationsController(_mediator.Object, _mapper.Object);
-            _mediator.Setup(x => x.Send(It.IsAny<IRequest<MonthlySelfEmployeeCalculationResult>>(),
-                It.IsAny<CancellationToken>())).Returns(Task.FromResult(new MonthlySelfEmployeeCalculationResult()));
+            _mediator.Setup(x => x.Send(It.IsAny<IRequest<SelfEmployeeCalculationResult>>(),
+                It.IsAny<CancellationToken>())).Returns(Task.FromResult(new SelfEmployeeCalculationResult()));
             _mapper.Setup(x =>
-                x.Map<MonthlySelfEmployeeCalculation, MonthlySelfEmployeeCalculationResult>(
-                    It.IsAny<MonthlySelfEmployeeCalculation>())).Returns(new MonthlySelfEmployeeCalculationResult());
-            var command = MonthlySelfEmployeeCalculationCommandFactory.CreateDefault();
+                x.Map<SelfEmployeeCalculation, SelfEmployeeCalculationResult>(
+                    It.IsAny<SelfEmployeeCalculation>())).Returns(new SelfEmployeeCalculationResult());
+            var command = SelfEmployeeCalculationCommandFactory.CreateDefault();
 
-            var results = await controller.MonthlySelfEmployeeCalculation(command);
+            var results = await controller.SelfEmployeeCalculation(command);
 
             Assert.NotNull(results);
 

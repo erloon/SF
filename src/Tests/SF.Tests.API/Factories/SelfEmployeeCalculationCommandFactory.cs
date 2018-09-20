@@ -4,7 +4,7 @@ using SF.Domain.Model;
 
 namespace SF.Tests.API.Factories
 {
-    public static class MonthlySelfEmployeeCalculationCommandFactory
+    public static class SelfEmployeeCalculationCommandFactory
     {
         private const decimal ACIDENTPERCENTAGE = 0.0m;
         private const decimal INCOMECOSTS = 0.0m;
@@ -12,9 +12,9 @@ namespace SF.Tests.API.Factories
         private const decimal VATDEDCUCTIONS = 0m;
         private const TaxationForm TAXIATIONFORM = TaxationForm.GENERAL;
 
-        public static MonthlySelfEmployeeCalculationCommand CreateDefault()
+        public static SelfEmployeeCalculationCommand CreateDefault()
         {
-            return new MonthlySelfEmployeeCalculationCommand()
+            return new SelfEmployeeCalculationCommand()
             {
                 AccidentContributionPercentage = ACIDENTPERCENTAGE,
                 IncomeCosts = INCOMECOSTS,

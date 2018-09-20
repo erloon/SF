@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  sf.api:
-    image: ${DOCKER_REGISTRY}sfapi
-    build:
-      context: .
-      dockerfile: SF.API\Dockerfile

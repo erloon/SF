@@ -57,13 +57,13 @@ namespace SF.API
                 app.UseHsts();
             }
 
-            
-            //app.UseHttpsRedirection();
+
+            app.UseHttpsRedirection();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/SF.API/swagger/v1/swagger.json", "SF API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SF API V1");
             });
         }
 
