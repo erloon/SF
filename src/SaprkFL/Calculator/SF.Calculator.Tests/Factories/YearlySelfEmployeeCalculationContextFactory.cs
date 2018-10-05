@@ -38,7 +38,7 @@ namespace SF.Calculator.Tests.Factories
             {Month.DECEMBER,8000m }
         };
 
-        private static decimal VAT = 0.23m;
+        //private static decimal VAT = 0.23m;
 
         public static YearlySelfEmployeeCalculationContext Create(TaxationForm taxation, bool isMedicalInsurance = false,
             Dictionary<Month, decimal> costs = null,
