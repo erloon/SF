@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   sf.calculator.api:
-    image: ${DOCKER_REGISTRY}sfcalculatorapi
+    image: sfcalculatorapi
     build:
       context: .
       dockerfile: Calculator\SF.Calculator.API\Dockerfile
