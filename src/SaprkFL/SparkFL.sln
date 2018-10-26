@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.Calculator.API", "Calcul
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F168E968-A19F-4B30-9ED7-C39D1EA3F4D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.Calculator.Persistance", "Calculator\SF.Calculator.Persistance\SF.Calculator.Persistance.csproj", "{BDB966A5-4496-42BC-8203-C882BFE68371}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.Calculator.Persistence", "Calculator\SF.Calculator.Persistance\SF.Calculator.Persistence.csproj", "{BDB966A5-4496-42BC-8203-C882BFE68371}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

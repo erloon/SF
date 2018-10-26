@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SF.Calculator.Core.Registrations;
+using SF.Calculator.Persistence;
 using SF.Shared.Infrastructure.MediatR;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -62,6 +63,7 @@ namespace SF.Calculator.API
         {
             builder.RegisterModule(new MetiatrModule());
             builder.RegisterModule(new DomainModule());
+            builder.RegisterModule(new CalculatorPersistenceModule());
         }
     }
 }

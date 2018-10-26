@@ -2,7 +2,10 @@ version: '3.4'
 
 services:
   sf.calculator.api:
-    image: sfcalculatorapi
+    image: ${DOCKER_REGISTRY}calculatorapi
     build:
       context: .
-      dockerfile: Calculator\SF.Calculator.API\Dockerfile
+      dockerfile: Calculator/SF.Calculator.API/Dockerfile
+  postgresdb:
+    image: postgres
+    restart: always

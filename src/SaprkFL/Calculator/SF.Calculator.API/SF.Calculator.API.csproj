@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <DockerTargetOS>Windows</DockerTargetOS>
+    <DockerTargetOS>Linux</DockerTargetOS>
     <UserSecretsId>245afcc5-9cc9-4ea0-94a8-4e73850c61c6</UserSecretsId>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
@@ -27,6 +27,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\SF.Shared.Infrastructure\SF.Shared.Infrastructure.csproj" />
     <ProjectReference Include="..\SF.Calculator.Core\SF.Calculator.Core.csproj" />
+    <ProjectReference Include="..\SF.Calculator.Persistance\SF.Calculator.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

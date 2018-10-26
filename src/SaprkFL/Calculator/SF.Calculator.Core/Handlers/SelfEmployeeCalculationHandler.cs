@@ -24,6 +24,9 @@ namespace SF.Calculator.Core.Handlers
         {
             var context = CreateSelfEmployeeCalculationContext(request);
             SelfEmployeeCalculation calculation = new SelfEmployeeCalculation(context);
+
+
+
             return await Task.FromResult(calculation);
         }
 
