@@ -15,7 +15,7 @@ namespace SF.Calculator.API.Infrastructure.Mappings
                 InsuranceContribution = new InsuranceContributionResult()
                 {
                     AccidentInsurance = source.InsuranceContribution.AccidentInsurance,
-                    DisabilitiInsurance = source.InsuranceContribution.DisabilitiInsurance,
+                    DisabilitiInsurance = source.InsuranceContribution.DisabilityInsurance,
                     HealthInsurance = source.InsuranceContribution.HealthInsurance,
                     LaborFoundInsurance = source.InsuranceContribution.LaborFoundInsurance,
                     MedicalInsurance = source.InsuranceContribution.MedicalInsurance,

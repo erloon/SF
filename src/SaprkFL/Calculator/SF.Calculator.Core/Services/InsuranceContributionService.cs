@@ -11,16 +11,7 @@ namespace SF.Calculator.Core.Services
             {
                 HealthBaseAmount = 3554.93m,
                 InsuranceBaseAmount = 2665.8m,
-                Percentage = new InsuranceContributionsPercentage()
-                {
-                    Accident = accidentContributionPercentage,
-                    Health = 0.09m,
-                    Disabiliti = 0.08m,
-                    HealthToDiscount = 0.0775m,
-                    LaborFound = 0.0245m,
-                    Medical = 0.0245m,
-                    Retirement = 0.1952m
-                },
+                Percentage =  new InsuranceContributionsPercentage(0,0.09m,0.1952m,0.0775m,0.08m, 0.0245m,0.0245m,true),
                 IsMedicalInsurance = withMedical
             };
         }
@@ -31,16 +22,7 @@ namespace SF.Calculator.Core.Services
             {
                 HealthBaseAmount = 3554.93m,
                 InsuranceBaseAmount = 630m,
-                Percentage = new InsuranceContributionsPercentage()
-                {
-                    Accident = accidentContributionPercentage,
-                    Health = 0.09m,
-                    Disabiliti = 0.08m,
-                    HealthToDiscount = 0.0775m,
-                    LaborFound = 0.0245m,
-                    Medical = 0.0245m,
-                    Retirement = 0.1952m
-                },
+                Percentage = new InsuranceContributionsPercentage(0,0.09m,0.1952m,0.0775m,0.08m, 0.0245m,0.0245m,true),
                 IsMedicalInsurance = withMedical
             };
         }

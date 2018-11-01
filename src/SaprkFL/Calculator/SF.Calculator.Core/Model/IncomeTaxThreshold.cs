@@ -1,4 +1,5 @@
-﻿using SF.Shared.Infrastructure;
+﻿using System;
+using SF.Shared.Infrastructure;
 
 namespace SF.Calculator.Core.Model
 {
@@ -9,21 +10,17 @@ namespace SF.Calculator.Core.Model
         public decimal FromAmount { get; protected set; }
         public decimal ToAmount { get; protected set; }
         public decimal Percentage { get; protected set; }
-
         public decimal PreviusMaxTaxValue
         {
-            get
-            {
-                return ToAmount * Percentage;
-            }
+            get => ToAmount * Percentage;
+            protected set => PreviusMaxTaxValue = value;
         }
-
-        public IncomeTaxThreshold()
+        protected IncomeTaxThreshold()
         {
-            
-        }            
+        }
         public IncomeTaxThreshold(TaxationForm taxationForm, int thresholdNumber, decimal fromAmount, decimal toAmount, decimal percentage)
         {
+            this.Id = Guid.NewGuid();
             TaxationForm = taxationForm;
             ThresholdNumber = thresholdNumber;
             FromAmount = fromAmount;

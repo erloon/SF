@@ -11,7 +11,7 @@ namespace SF.Calculator.Core.Model
         public decimal HealthInsurance { get; protected set; } // zdrowotne
         public decimal HealthInsuranceDiscount { get; protected set; } // zdrowotne do us
         public decimal MedicalInsurance { get; protected set; } // Chorobowe
-        public decimal DisabilitiInsurance { get; protected set; } // rentowe
+        public decimal DisabilityInsurance { get; protected set; } // rentowe
         public decimal RetirementInsurance { get; protected set; } // emerytalne
         public decimal AccidentInsurance { get; protected set; } //wypadkowe
         public decimal LaborFoundInsurance { get; protected set; } // Składka na fundusz pracy
@@ -34,14 +34,14 @@ namespace SF.Calculator.Core.Model
 
         public decimal InsuranceContributionsSum()
         {
-            var baseContributionSum = (HealthInsurance + DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance + MedicalInsurance);
+            var baseContributionSum = (HealthInsurance + DisabilityInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance + MedicalInsurance);
 
             return Math.Round(baseContributionSum, 2);
         }
 
         public decimal SocialInsuranceContributionSum()
         {
-            var baseContributionSum = (DisabilitiInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance + MedicalInsurance);
+            var baseContributionSum = (DisabilityInsurance + RetirementInsurance + AccidentInsurance + LaborFoundInsurance + MedicalInsurance);
 
             return Math.Round(baseContributionSum, 2);
         }
@@ -51,7 +51,7 @@ namespace SF.Calculator.Core.Model
         private void CalculateInsuranceParts(InsuranceContributionsPercentage insuranceContributionsPercentage)
         {
             CalculateHealthInsurance(insuranceContributionsPercentage, this.HealthBaseAmount);
-            CalculateDisabilitiInsurance(insuranceContributionsPercentage.Disabiliti, this.InsuranceBaseAmount);
+            CalculateDisabilitiInsurance(insuranceContributionsPercentage.Disability, this.InsuranceBaseAmount);
             CalculateRetirementInsurance(insuranceContributionsPercentage.Retirement, this.InsuranceBaseAmount);
             CalculateAccidentInsurance(insuranceContributionsPercentage.Accident, this.InsuranceBaseAmount);
             CalculatLaborFoundInsurance(insuranceContributionsPercentage.LaborFound, this.InsuranceBaseAmount);
@@ -77,7 +77,7 @@ namespace SF.Calculator.Core.Model
 
         private void CalculateDisabilitiInsurance(decimal disabiliti, decimal insuranceBaseAmount)
         {
-            this.DisabilitiInsurance = CalculateInsurance(disabiliti, insuranceBaseAmount);
+            this.DisabilityInsurance = CalculateInsurance(disabiliti, insuranceBaseAmount);
         }
 
         private void CalculateMedicalInsurance(decimal medical, decimal insuranceBaseAmount)

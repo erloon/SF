@@ -18,6 +18,8 @@ namespace SF.Calculator.Core.Model
         private decimal _taxFreeAmount = 46.34m;
         public InsuranceContribution InsuranceContribution { get; protected set; }
 
+        protected SelfEmployeeCalculation(){}
+
         public SelfEmployeeCalculation(SelfEmployeeCalculationContext calculationContext)
         {
             if (calculationContext == null) throw new ArgumentNullException(nameof(calculationContext));
@@ -43,9 +45,9 @@ namespace SF.Calculator.Core.Model
         {
             //TODO Add vat rate to command and context
             if (calculationContext.IsGross)
-                this.VatAmount =  Math.Round((calculationContext.BaseAmount - (calculationContext.BaseAmount / (1 + _vatTaxeRate))),2);
+                this.VatAmount = Math.Round((calculationContext.BaseAmount - (calculationContext.BaseAmount / (1 + _vatTaxeRate))), 2);
             else
-                this.VatAmount = Math.Round((calculationContext.BaseAmount * _vatTaxeRate),2);
+                this.VatAmount = Math.Round((calculationContext.BaseAmount * _vatTaxeRate), 2);
         }
 
         private void AddInsuranceContribution(InsuranceContributionContext insuranceContributionContext)

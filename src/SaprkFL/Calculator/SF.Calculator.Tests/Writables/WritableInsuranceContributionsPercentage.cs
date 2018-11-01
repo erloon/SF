@@ -26,7 +26,7 @@ namespace SF.Calculator.Tests.Writables
         }
         public WritableInsuranceContributionsPercentage WithDisabiliti(decimal disabiliti)
         {
-            this.Disabiliti = disabiliti;
+            this.Disability = disabiliti;
             return this;
         }
         public WritableInsuranceContributionsPercentage WithMedical(decimal medical)

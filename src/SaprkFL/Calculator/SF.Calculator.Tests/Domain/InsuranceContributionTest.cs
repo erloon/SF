@@ -45,7 +45,7 @@ namespace SF.Calculator.Tests.Domain
             var insuranceContribution = new InsuranceContribution(context);
 
             Assert.AreEqual(65.31m, insuranceContribution.MedicalInsurance);
-            Assert.AreEqual(213.26m, insuranceContribution.DisabilitiInsurance);
+            Assert.AreEqual(213.26m, insuranceContribution.DisabilityInsurance);
             Assert.AreEqual(520.36m, insuranceContribution.RetirementInsurance);
             Assert.AreEqual(47.98m, insuranceContribution.AccidentInsurance);
         }

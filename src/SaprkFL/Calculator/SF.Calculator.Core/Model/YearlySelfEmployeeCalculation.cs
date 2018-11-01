@@ -10,8 +10,9 @@ namespace SF.Calculator.Core.Model
         public decimal TotalIncomes { get; protected set; }
         public decimal TotalCosts { get; protected set; }
 
-        public List<SelfEmployeeCalculation> Calculations { get; protected set; }
+        public virtual List<SelfEmployeeCalculation> Calculations { get; protected set; }
 
+        protected YearlySelfEmployeeCalculation() { }
         public YearlySelfEmployeeCalculation(YearlySelfEmployeeCalculationContext context)
         {
             this.Id = Guid.NewGuid();
