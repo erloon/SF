@@ -19,10 +19,10 @@ namespace SF.Calculator.Persistence.Configurations
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.HasKey(x => x.Id);
 
-            //builder.HasData(new InsuranceContributionsPercentage[]
-            //{
-            //    new InsuranceContributionsPercentage(0,0.09m,0.1952m,0.0775m,0.08m, 0.0245m,0.0245m,true)
-            //});
+            builder.HasData(new InsuranceContributionsPercentage[]
+            {
+                new InsuranceContributionsPercentage(0,0.09m,0.1952m,0.0775m,0.08m, 0.0245m,0.0245m,true)
+            });
         }
     }
 }

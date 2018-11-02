@@ -10,8 +10,8 @@ using SF.Calculator.Persistence;
 namespace SF.Calculator.Persistence.Migrations
 {
     [DbContext(typeof(SFCalculatorContext))]
-    [Migration("20181101122321_Initial")]
-    partial class Initial
+    [Migration("20181102194803_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,6 @@ namespace SF.Calculator.Persistence.Migrations
                     b.Property<decimal>("Percentage")
                         .HasColumnType("decimal(2,2)");
 
-                    b.Property<decimal>("PreviusMaxTaxValue")
-                        .HasColumnType("decimal(12,2)");
-
                     b.Property<int>("TaxationForm");
 
                     b.Property<int>("ThresholdNumber");
@@ -45,6 +42,12 @@ namespace SF.Calculator.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IncomeTaxThresholds");
+
+                    b.HasData(
+                        new { Id = new Guid("3e80aa7c-5bd2-40c0-8ab3-e76ea03be716"), FromAmount = 0m, Percentage = 0.19m, TaxationForm = 2, ThresholdNumber = 1, ToAmount = 2147483647m },
+                        new { Id = new Guid("216f62ca-6d50-4b3e-a148-60750fdac295"), FromAmount = 0m, Percentage = 0.18m, TaxationForm = 1, ThresholdNumber = 1, ToAmount = 85528m },
+                        new { Id = new Guid("ed67033f-6f53-4457-b7cd-b29395e232c5"), FromAmount = 85528m, Percentage = 0.32m, TaxationForm = 1, ThresholdNumber = 2, ToAmount = 2147483647m }
+                    );
                 });
 
             modelBuilder.Entity("SF.Calculator.Core.Model.InsuranceContribution", b =>
@@ -110,6 +113,10 @@ namespace SF.Calculator.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("InsuranceContributionsPercentages");
+
+                    b.HasData(
+                        new { Id = new Guid("37096404-0885-4228-8167-2d41259903e3"), Accident = 0m, Disability = 0.08m, Health = 0.09m, HealthToDiscount = 0.0775m, IsActive = true, LaborFound = 0.0245m, Medical = 0.0245m, Retirement = 0.1952m }
+                    );
                 });
 
             modelBuilder.Entity("SF.Calculator.Core.Model.SelfEmployeeCalculation", b =>

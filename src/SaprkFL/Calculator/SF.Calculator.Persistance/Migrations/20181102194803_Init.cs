@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SF.Calculator.Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,8 +16,7 @@ namespace SF.Calculator.Persistence.Migrations
                     ThresholdNumber = table.Column<int>(nullable: false),
                     FromAmount = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
                     ToAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Percentage = table.Column<decimal>(type: "decimal(2,2)", nullable: false),
-                    PreviusMaxTaxValue = table.Column<decimal>(type: "decimal(12,2)", nullable: false)
+                    Percentage = table.Column<decimal>(type: "decimal(2,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,10 +108,27 @@ namespace SF.Calculator.Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "IncomeTaxThresholds",
+                columns: new[] { "Id", "FromAmount", "Percentage", "TaxationForm", "ThresholdNumber", "ToAmount" },
+                values: new object[,]
+                {
+                    { new Guid("3e80aa7c-5bd2-40c0-8ab3-e76ea03be716"), 0m, 0.19m, 2, 1, 2147483647m },
+                    { new Guid("216f62ca-6d50-4b3e-a148-60750fdac295"), 0m, 0.18m, 1, 1, 85528m },
+                    { new Guid("ed67033f-6f53-4457-b7cd-b29395e232c5"), 85528m, 0.32m, 1, 2, 2147483647m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "InsuranceContributionsPercentages",
+                columns: new[] { "Id", "Accident", "Disability", "Health", "HealthToDiscount", "IsActive", "LaborFound", "Medical", "Retirement" },
+                values: new object[] { new Guid("37096404-0885-4228-8167-2d41259903e3"), 0m, 0.08m, 0.09m, 0.0775m, true, 0.0245m, 0.0245m, 0.1952m });
+
             migrationBuilder.CreateIndex(
                 name: "IX_SelfEmployeeCalculations_InsuranceContributionId",
                 table: "SelfEmployeeCalculations",
                 column: "InsuranceContributionId");
+
+            migrationBuilder.Sql(@"CREATE EXTENSION ""uuid-ossp"";");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
