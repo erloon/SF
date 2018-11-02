@@ -17,23 +17,16 @@ namespace SF.Calculator.Core.Services
         public IncomeTaxThreshold GetLinearRate()
         {
             return _taxThresholdRepository.Get(TaxationForm.LINEAR).FirstOrDefault();
-            //return new IncomeTaxThreshold(TaxationForm.LINEAR, 1, 0, int.MaxValue, 0.19m);
         }
 
         public List<IncomeTaxThreshold> GetGeneralIncomeTaxThresholds()
         {
             return _taxThresholdRepository.Get(TaxationForm.GENERAL);
-            //return new List<IncomeTaxThreshold>()
-            //{
-            //   new IncomeTaxThreshold(TaxationForm.GENERAL,1,0,85528m,0.18m),
-            //   new IncomeTaxThreshold(TaxationForm.GENERAL,2,85528m,int.MaxValue,0.32m)
-            //};
         }
 
         public List<IncomeTaxThreshold> GetFlatRates()
         {
             return _taxThresholdRepository.Get(TaxationForm.FLAT);
-            //throw new System.NotImplementedException();
         }
     }
 }

@@ -11,10 +11,13 @@ namespace SF.Calculator.Persistence
         public DbSet<InsuranceContribution> InsuranceContributions { get; set; }
         public DbSet<SelfEmployeeCalculation> SelfEmployeeCalculations { get; set; }
         public DbSet<YearlySelfEmployeeCalculation> YearlySelfEmployeeCalculations { get; set; }
+        public DbSet<BaseValuesDictionary> BaseValuesDictionaries { get; set; }
 
+        public SFCalculatorContext(DbContextOptions<SFCalculatorContext> options): base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"host = localhost; port = 5432; database = sf; password = password; username = user");
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -25,6 +28,7 @@ namespace SF.Calculator.Persistence
             modelBuilder.ApplyConfiguration(new InsuranceContributionConfig());
             modelBuilder.ApplyConfiguration(new SelfEmployeeCalculationConfig());
             modelBuilder.ApplyConfiguration(new YearlySelfEmployeeCalculationConfig());
+            modelBuilder.ApplyConfiguration(new BaseValuesDictionaryConfig());
             base.OnModelCreating(modelBuilder);
         }
     }

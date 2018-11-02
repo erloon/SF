@@ -8,14 +8,14 @@ namespace SF.Calculator.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<InsuranceContributionsPercentage> builder)
         {
-            builder.Property(x => x.Accident); //.HasColumnType("decimal(2,4)");
-            builder.Property(x => x.Disability); //.HasColumnType("decimal(2,4)");
-            builder.Property(x => x.Health); //.HasColumnType("decimal(2,4)");
-            builder.Property(x => x.HealthToDiscount); //.HasColumnType("decimal(2,4)");
-            builder.Property(x => x.LaborFound); //.HasColumnType("decimal(2,4)");
-            builder.Property(x => x.Medical); //.HasColumnType("decimal(2,4)");
-            builder.Property(x => x.Retirement); //.HasColumnType("decimal(2,4)");
-            builder.Property(x => x.IsActive); //.HasColumnType("decimal(2,4)");
+            builder.Property(x => x.Accident); 
+            builder.Property(x => x.Disability);
+            builder.Property(x => x.Health); 
+            builder.Property(x => x.HealthToDiscount); 
+            builder.Property(x => x.LaborFound); 
+            builder.Property(x => x.Medical);
+            builder.Property(x => x.Retirement);
+            builder.Property(x => x.IsActive);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.HasKey(x => x.Id);
 

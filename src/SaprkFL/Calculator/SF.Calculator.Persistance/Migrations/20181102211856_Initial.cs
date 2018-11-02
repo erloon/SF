@@ -3,10 +3,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SF.Calculator.Persistence.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BaseValuesDictionaries",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Key = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BaseValuesDictionaries", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "IncomeTaxThresholds",
                 columns: table => new
@@ -109,30 +122,43 @@ namespace SF.Calculator.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "BaseValuesDictionaries",
+                columns: new[] { "Id", "Key", "Value" },
+                values: new object[,]
+                {
+                    { new Guid("35b3126f-b13e-4ac9-acf0-50ae38fec915"), "HealthBaseAmount", "3554.93" },
+                    { new Guid("307c9908-343e-4cda-9535-2108ca10cc23"), "InsuranceBaseAmount", "2665.8" },
+                    { new Guid("4f4ddde4-a469-49d1-873c-20f64f7b275b"), "InsuranceBaseAmountWithDiscount", "630" },
+                    { new Guid("f48b9f46-8269-4b1e-a81a-b075b459985e"), "MonthlyTaxFreeAmount", "46.34" },
+                    { new Guid("f65d9257-43c6-499c-878d-bccd32f83374"), "VATTaxRate", "0.23" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "IncomeTaxThresholds",
                 columns: new[] { "Id", "FromAmount", "Percentage", "TaxationForm", "ThresholdNumber", "ToAmount" },
                 values: new object[,]
                 {
-                    { new Guid("3e80aa7c-5bd2-40c0-8ab3-e76ea03be716"), 0m, 0.19m, 2, 1, 2147483647m },
-                    { new Guid("216f62ca-6d50-4b3e-a148-60750fdac295"), 0m, 0.18m, 1, 1, 85528m },
-                    { new Guid("ed67033f-6f53-4457-b7cd-b29395e232c5"), 85528m, 0.32m, 1, 2, 2147483647m }
+                    { new Guid("519e0805-b997-49a5-af8e-a8b6b3137e03"), 0m, 0.19m, 2, 1, 2147483647m },
+                    { new Guid("2b22e3a1-b65f-4c53-b714-0e5e64a1a844"), 0m, 0.18m, 1, 1, 85528m },
+                    { new Guid("61d3991a-aef6-4282-a85f-b966e4e3717e"), 85528m, 0.32m, 1, 2, 2147483647m }
                 });
 
             migrationBuilder.InsertData(
                 table: "InsuranceContributionsPercentages",
                 columns: new[] { "Id", "Accident", "Disability", "Health", "HealthToDiscount", "IsActive", "LaborFound", "Medical", "Retirement" },
-                values: new object[] { new Guid("37096404-0885-4228-8167-2d41259903e3"), 0m, 0.08m, 0.09m, 0.0775m, true, 0.0245m, 0.0245m, 0.1952m });
+                values: new object[] { new Guid("2a952b22-89eb-4bd2-b9d4-1978a0771ea7"), 0m, 0.08m, 0.09m, 0.0775m, true, 0.0245m, 0.0245m, 0.1952m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SelfEmployeeCalculations_InsuranceContributionId",
                 table: "SelfEmployeeCalculations",
                 column: "InsuranceContributionId");
-
-            migrationBuilder.Sql(@"CREATE EXTENSION ""uuid-ossp"";");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BaseValuesDictionaries");
+
             migrationBuilder.DropTable(
                 name: "IncomeTaxThresholds");
 

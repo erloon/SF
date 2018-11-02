@@ -11,6 +11,12 @@ namespace SF.Calculator.Persistence
             builder.RegisterType<IncomeTaxThresholdRepository>()
                 .As<IIncomeTaxThresholdRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<InsuranceContributionRepository>()
+                .As<IInsuranceContributionRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<BaseValuesDictionaryRepository>()
+                .As<IBaseValuesDictionaryRepository>()
+                .InstancePerLifetimeScope();
             base.Load(builder);
         }
     }
