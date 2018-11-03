@@ -12,7 +12,25 @@ Project is designed to show a practical approach to creating web applications an
 * Moq
 * NUnit
 * Swagger
+* Docker
+* PostgresSQL
+* Entity Framework Core
 
+To run on Docker
+
+First step:
+```
+docker-compose build
+```
+Second step:
+```
+docker-compose up
+```
+## Swagger URL
+https://localhost:44325/swagger
+## Postgres
+```
+localhost port 5432
+```
 ## Demo 
-
 ![sparkfreelancer](https://user-images.githubusercontent.com/9487450/45780351-b2a5f080-bc5d-11e8-8643-0d14970ba2e0.PNG)
