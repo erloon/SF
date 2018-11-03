@@ -14,5 +14,7 @@ namespace SF.Calculator.Core.DTO
         public TaxationForm TaxationForm { get; set; }
         public Func<TaxCalculationContext, decimal> IncomeTaxAmmount { get; set; }
         public InsuranceContributionContext InsuranceContributionContext { get; set; }
+        public decimal VatTaxRate { get; set; }
+        public decimal MonthlyTaxFreeAmount { get; set; }
     }
 }

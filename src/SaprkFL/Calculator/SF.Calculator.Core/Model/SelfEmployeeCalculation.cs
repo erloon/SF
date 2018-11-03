@@ -45,9 +45,9 @@ namespace SF.Calculator.Core.Model
         {
             //TODO Add vat rate to command and context
             if (calculationContext.IsGross)
-                this.VatAmount = Math.Round((calculationContext.BaseAmount - (calculationContext.BaseAmount / (1 + _vatTaxeRate))), 2);
+                this.VatAmount = Math.Round((calculationContext.BaseAmount - (calculationContext.BaseAmount / (1 + calculationContext.VatTaxRate))), 2);
             else
-                this.VatAmount = Math.Round((calculationContext.BaseAmount * _vatTaxeRate), 2);
+                this.VatAmount = Math.Round((calculationContext.BaseAmount * calculationContext.VatTaxRate), 2);
         }
 
         private void AddInsuranceContribution(InsuranceContributionContext insuranceContributionContext)
@@ -67,8 +67,8 @@ namespace SF.Calculator.Core.Model
                 this.TaxAmount = 0;
             else
             {
-                if (calculationContext.TaxationForm == TaxationForm.LINEAR) _taxFreeAmount = 0;
-                this.TaxAmount = Math.Round(calculationContext.IncomeTaxAmmount.Invoke(CreateTaxCalculationContext(calculationContext)) - (this.InsuranceContribution.HealthInsuranceDiscount + _taxFreeAmount), 0); //TODO move to db
+                if (calculationContext.TaxationForm == TaxationForm.LINEAR) calculationContext.MonthlyTaxFreeAmount = 0;
+                this.TaxAmount = Math.Round(calculationContext.IncomeTaxAmmount.Invoke(CreateTaxCalculationContext(calculationContext)) - (this.InsuranceContribution.HealthInsuranceDiscount + calculationContext.MonthlyTaxFreeAmount), 0);
             }
         }
 
