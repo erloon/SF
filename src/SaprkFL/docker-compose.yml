@@ -9,3 +9,9 @@ services:
   postgresdb:
     image: postgres
     restart: always
+  sf.ui.web:
+    image: ${DOCKER_REGISTRY}sfuiweb
+    build:
+      context: .
+      dockerfile: UI/SF.UI.Web/Dockerfile
+
