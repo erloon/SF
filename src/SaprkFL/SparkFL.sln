@@ -19,6 +19,10 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SF.Calculator.Persistence", "Calculator\SF.Calculator.Persistance\SF.Calculator.Persistence.csproj", "{BDB966A5-4496-42BC-8203-C882BFE68371}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{0D3D6BAF-763E-4D59-9FE9-E16E9AAFD672}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SF.UI.Web", "..\UI\SF.UI.Web\SF.UI.Web.csproj", "{58DDF8EC-D81A-449E-BD86-9E3F06F13004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{BDB966A5-4496-42BC-8203-C882BFE68371}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB966A5-4496-42BC-8203-C882BFE68371}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB966A5-4496-42BC-8203-C882BFE68371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58DDF8EC-D81A-449E-BD86-9E3F06F13004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58DDF8EC-D81A-449E-BD86-9E3F06F13004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58DDF8EC-D81A-449E-BD86-9E3F06F13004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58DDF8EC-D81A-449E-BD86-9E3F06F13004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{30248048-39A1-4CE5-A2D9-65D30ECA2ED9} = {3C421781-0973-4E73-A605-91793BB57015}
 		{F12A2CAA-A3D9-418E-934F-2D45E9FC754A} = {3C421781-0973-4E73-A605-91793BB57015}
 		{BDB966A5-4496-42BC-8203-C882BFE68371} = {3C421781-0973-4E73-A605-91793BB57015}
+		{58DDF8EC-D81A-449E-BD86-9E3F06F13004} = {0D3D6BAF-763E-4D59-9FE9-E16E9AAFD672}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD5270A4-7E9B-4617-A574-00EC5A4E08C1}
