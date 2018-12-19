@@ -1,5 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle';
+
 import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
