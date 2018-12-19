@@ -1,5 +1,5 @@
 {
-  "name": "SF.UI.Web",
+  "name": "sf.ui.web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
