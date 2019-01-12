@@ -1,17 +1,15 @@
 import React from 'react';
-// import { Col, Grid, Row } from 'react-bootstrap';
-import NavMenu from './NavMenu';
+import Sidebar from './Sidebar';
+import Navbar from './Navbar';
 
 export default props => (
-  <div>
-    <header>
-      <NavMenu />
-    </header>
+  <div className="wrapper">
 
-    <main className="container-fluid">
+   <Sidebar/>
+
+    <div id="content">
+      <Navbar/>
       {props.children}
-    </main>
-
-    <footer></footer>
+    </div>
   </div>
 );

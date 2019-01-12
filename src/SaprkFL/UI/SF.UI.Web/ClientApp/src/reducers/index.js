@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
-import SelfEmployeeCalculationReducer from './SelfEmployeeCalculationReducer';
+import selfEmployeeCalculationReducer from './SelfEmployeeCalculationReducer';
+import layoutReducer from './LayoutReducer';
 
 export default combineReducers({
-    selfEmployeeCalculation: SelfEmployeeCalculationReducer,
+    selfEmployeeCalculation: selfEmployeeCalculationReducer,
     routing: routerReducer,
-    form: formReducer
+    form: formReducer,
+    layout : layoutReducer
 });
