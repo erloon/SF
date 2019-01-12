@@ -8,8 +8,7 @@ import { stat } from 'fs';
 class SelfEmployeeCalculation extends Component {
 
     render() {
-
-        console.log(this.props);
+ 
         return (
 
             <div className="row">
@@ -20,7 +19,7 @@ class SelfEmployeeCalculation extends Component {
                         Oblicz wysokość wynagrodzenia dla dziłalności gospodarczej
                     </p>
                     <hr />
-                    <form>
+                    <form >
                         <div className="form-row">
                             <div className="form-group col">
                                 <label htmlFor="salary">Wynagrodzenie</label>
@@ -100,5 +99,5 @@ const SelfEmployeeCalculationLink = connect(
 )(SelfEmployeeCalculation);
 
 export default reduxForm({
-    form: 'selfEmployeeCalculation' // a unique identifier for this form
+    form: 'selfEmployeeCalculation' 
 })(SelfEmployeeCalculationLink)

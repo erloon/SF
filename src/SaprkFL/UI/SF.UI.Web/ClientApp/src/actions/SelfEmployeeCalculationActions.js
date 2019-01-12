@@ -1,20 +1,8 @@
-export const calculateSelfEmployeeSalaryType = "CALCULATE_SELFEMPLOYEE_SALARY";
+import { CALCULATE_SELFEMPLOYEE_SALARY } from '../actions/types'
 
-export const actionCreators = {
-    calculateSelfEmployeeSalary: selfEmployeeCalculation => async (dispatch, getState) => {
-        debugger;
-
-        return {
-            type: "CALCULATE_SELFEMPLOYEE_SALARY",
-            payload: "565656565"
-        };
-    }
-
-};
-
-export const CalculateSalary = data=>{
+export const CalculateSalary = data => {
     return {
-        type: "CALCULATE_SELFEMPLOYEE_SALARY",
+        type: CALCULATE_SELFEMPLOYEE_SALARY,
         payload: "565656565"
     };
 }
