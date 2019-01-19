@@ -8,17 +8,17 @@ import { stat } from 'fs';
 class SelfEmployeeCalculation extends Component {
 
     render() {
- 
-        return (
 
-            <div className="row">
-                <div className="col-3"></div>
-                <div className="col-6 mt-4">
+        return (
+            <div>
+                <div className="row">
+
                     <p className="h3 text-center">Kalkulacja</p>
                     <p className="lead">
                         Oblicz wysokość wynagrodzenia dla dziłalności gospodarczej
                     </p>
-                    <hr />
+                </div>
+                <div className="row">
                     <form >
                         <div className="form-row">
                             <div className="form-group col">
@@ -70,21 +70,22 @@ class SelfEmployeeCalculation extends Component {
                         </div>
 
                         <hr />
-                        <button type="button" className="btn btn-info" onClick={()=>this.props.calculate()} >Dalej</button>
+                        <button type="button" className="btn btn-info" onClick={() => this.props.calculate()} >Dalej</button>
                         <button type="submit" className="btn btn-success">Przelicz</button>
                     </form>
-                </div>
-                <div className="col-3"></div>
-            </div >
 
+                </div >
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
 
-    return { data: state.testData ,
-             calculationdata: state.selfEmployeeCalculation};
+    return {
+        data: state.testData,
+        calculationdata: state.selfEmployeeCalculation
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -99,5 +100,5 @@ const SelfEmployeeCalculationLink = connect(
 )(SelfEmployeeCalculation);
 
 export default reduxForm({
-    form: 'selfEmployeeCalculation' 
+    form: 'selfEmployeeCalculation'
 })(SelfEmployeeCalculationLink)

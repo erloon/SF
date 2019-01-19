@@ -1,6 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 class Sidebar extends React.Component {
 
@@ -14,6 +14,9 @@ class Sidebar extends React.Component {
                 <ul className="list-unstyled components">
                     <li>
                         <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/selfemployeecalculation">Kalkulacja</Link>
                     </li>
                     <li className="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Finanse</a>
@@ -32,7 +35,7 @@ class Sidebar extends React.Component {
     };
 };
 
-const mapStateToProps = state =>{
-    return {sidebarCss: state.layout.sidebarCss};
+const mapStateToProps = state => {
+    return { sidebarCss: state.layout.sidebarCss };
 }
-export default connect(mapStateToProps,null)(Sidebar);
+export default connect(mapStateToProps, null)(Sidebar);

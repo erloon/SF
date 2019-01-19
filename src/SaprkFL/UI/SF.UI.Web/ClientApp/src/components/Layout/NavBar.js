@@ -12,7 +12,7 @@ class Navbar extends React.Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
-                    <button type="button" id="sidebarCollapse" className="navbar-btn" onClick={this.onClickSidebar.bind(this)}>
+                    <button type="button" id="sidebarCollapse" className={`navbar-btn ${this.props.sidebarCss}`} onClick={this.onClickSidebar.bind(this)}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -26,7 +26,7 @@ class Navbar extends React.Component {
                                 <Link className="nav-link" to="/contact">Kontakt</Link>
                             </li>
                             <li className="nav-item active">
-                                <Link className="nav-link" to="/github">Github</Link>
+                                <a className="nav-link" href="https://github.com/erloon/SF">Github</a>
                             </li>
                         </ul>
                     </div>
