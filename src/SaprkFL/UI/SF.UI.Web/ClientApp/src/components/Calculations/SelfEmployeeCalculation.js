@@ -6,12 +6,9 @@ import { getDictionaries } from "../../actions/DictionaryActions";
 
 class SelfEmployeeCalculation extends Component {
     onSubmit = (formValues) => {
-
-        debugger;
         this.props.calculateSalary(formValues)
     }
     componentDidMount() {
-        debugger;
         this.props.getDictionaries();
     }
     renderOption = (values) => {
@@ -27,7 +24,7 @@ class SelfEmployeeCalculation extends Component {
         if (!this.props.calculationDictionary) {
             return <div>Loading ... </div>
         }
-        const { InsuranceContributionForm, TxationForm } = this.props.calculationDictionary;
+        const { InsuranceContributionForm, TxationForm, CalcualtionDefaultValues } = this.props.calculationDictionary;
         return (
             <div>
                 <h1 className="text-center">Kalkulacja</h1>
@@ -36,7 +33,13 @@ class SelfEmployeeCalculation extends Component {
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label" htmlFor="salary">Wynagrodzenie</label>
                         <div className="col-sm-10 col-md-8 col-lg-6">
-                            <Field className="form-control" component="input" type="number" placeholder="Kwota na jaką wystawiasz fakturę" name="salary" />
+                            <Field 
+                                className="form-control" 
+                                component="input" 
+                                type="number" 
+                                placeholder="Kwota na jaką wystawiasz fakturę" 
+                                name="salary"
+                                value={CalcualtionDefaultValues.Salary} />
                         </div>
                     </div>
                     <div className="form-group row">
@@ -71,7 +74,8 @@ class SelfEmployeeCalculation extends Component {
                         <div className="col-sm-10 col-md-8 col-lg-6">
                             <div className="form-check">
                                 <Field className="form-check-input" component="input" type="checkbox" name="isMedicalInsurance" />
-                                <label className="form-check-label" htmlFor="isMedicalInsurance">Ubezpieczenie zdrowotne?</label>                            </div>
+                                <label className="form-check-label" htmlFor="isMedicalInsurance">Ubezpieczenie zdrowotne?</label>
+                            </div>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -81,9 +85,9 @@ class SelfEmployeeCalculation extends Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label htmlFor="isReliefForSocialInsurance" className="col-sm-2 col-form-label">Ulga przy składkach ZUS</label>
+                        <label htmlFor="insuranceContributionForm" className="col-sm-2 col-form-label">Ulga przy składkach ZUS</label>
                         <div className="col-sm-10 col-md-8 col-lg-6">
-                            <Field className="custom-select" component="select" name="isReliefForSocialInsurance" >
+                            <Field className="custom-select" component="select" name="insuranceContributionForm" >
                                 {this.renderOption(InsuranceContributionForm)}
                             </Field>
                         </div>
@@ -97,13 +101,14 @@ class SelfEmployeeCalculation extends Component {
                         </div>
                     </div>
                     <div className="form-group row">
-                    <div className="col-sm-2"></div>
-                    <div className="col-sm-10 col-md-8 col-lg-6">
-                        <div className="form-check">
-                            <Field className="form-check-input" component="input" type="checkbox" name="differentMonthlySalary" />
-                            <label className="form-check-label" htmlFor="differentMonthlySalary">Ubezpieczenie zdrowotne?</label>                            </div>
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
+                            <div className="form-check">
+                                <Field className="form-check-input" component="input" type="checkbox" name="differentMonthlySalary" />
+                                <label className="form-check-label" htmlFor="differentMonthlySalary">Ubezpieczenie zdrowotne?</label>
+                            </div>
+                        </div>
                     </div>
-                </div>
                     <div className="form-group row">
                         <div className="col-sm-2"></div>
                         <div className="col-sm-10 col-md-8 col-lg-6">
@@ -122,7 +127,8 @@ class SelfEmployeeCalculation extends Component {
 const mapStateToProps = (state) => {
     return {
         calculationdata: state.selfEmployeeCalculation,
-        calculationDictionary: state.calculationDictionary
+        calculationDictionary: state.calculationDictionary,
+        initialValues: state.calculationDictionary.CalcualtionDefaultValues
     };
 };
 
@@ -132,5 +138,6 @@ const SelfEmployeeCalculationLink = connect(
 )(SelfEmployeeCalculation);
 
 export default reduxForm({
-    form: 'selfEmployeeCalculation'
+    form: 'selfEmployeeCalculation',
+    enableReinitialize : true
 })(SelfEmployeeCalculationLink)
