@@ -24,18 +24,7 @@ const initialState = {
                 name: "Liniowy (19%)",
                 value: 2
             }
-        ],
-        CalcualtionDefaultValues: {
-            salary: 0,
-            isGross: false,
-            vatAmmountDeduction: 0,
-            incomeCosts: 0,
-            previusMonthsIncomes: 0,
-            isMedicalInsurance: false,
-            accidentContributionPercentage: 1.67,
-            insuranceContributionForm: 1,
-            taxationForm: 1
-        }
+        ]
 }
 
 export default (state = initialState , action) => {

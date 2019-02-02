@@ -11,6 +11,19 @@ class SelfEmployeeCalculation extends Component {
     componentDidMount() {
         this.props.getDictionaries();
     }
+    componentWillMount(){
+        this.props.initialize({
+            salary: 0,
+            isGross: false,
+            vatAmmountDeduction: 0,
+            incomeCosts: 0,
+            previusMonthsIncomes: 0,
+            isMedicalInsurance: false,
+            accidentContributionPercentage: 1.67,
+            insuranceContributionForm: 1,
+            taxationForm: 1
+        });
+    }
     renderOption = (values) => {
         return values.map(v => {
             return (
@@ -24,7 +37,7 @@ class SelfEmployeeCalculation extends Component {
         if (!this.props.calculationDictionary) {
             return <div>Loading ... </div>
         }
-        const { InsuranceContributionForm, TxationForm, CalcualtionDefaultValues } = this.props.calculationDictionary;
+        const { InsuranceContributionForm, TxationForm } = this.props.calculationDictionary;
         return (
             <div>
                 <h1 className="text-center">Kalkulacja</h1>
@@ -37,9 +50,11 @@ class SelfEmployeeCalculation extends Component {
                                 className="form-control" 
                                 component="input" 
                                 type="number" 
-                                placeholder="Kwota na jaką wystawiasz fakturę" 
                                 name="salary"
-                                value={CalcualtionDefaultValues.Salary} />
+                                min="0"
+                                aria-describedby="salaryHelp"
+                                />
+                                <small id="salaryHelp" class="form-text text-muted">Kwota na jaką wystawiasz fakturę</small>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -54,19 +69,43 @@ class SelfEmployeeCalculation extends Component {
                     <div className="form-group row">
                         <label htmlFor="vatAmmountDeduction" className="col-sm-2 col-form-label">Odliczenie VAT</label>
                         <div className="col-sm-10 col-md-8 col-lg-6">
-                            <Field className="form-control" component="input" type="number" placeholder="Kwota VAT do odliczenia z faktur kosztowych" name="vatAmmountDeduction" />
+                            <Field 
+                                className="form-control" 
+                                component="input" 
+                                type="number" 
+                                min="0"
+                                name="vatAmmountDeduction" 
+                                aria-describedby="vatAmmountDeductionHelp"
+                                />
+                            <small id="vatAmmountDeductionHelp" class="form-text text-muted">Kwota VAT do odliczenia z faktur kosztowych</small>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label htmlFor="incomeCosts" className="col-sm-2 col-form-label">Koszty</label>
                         <div className="col-sm-10 col-md-8 col-lg-6">
-                            <Field className="form-control" component="input" type="number" placeholder="Koszty uzyskania przychodu netto" name="incomeCosts" />
+                            <Field 
+                                className="form-control" 
+                                component="input" 
+                                type="number" 
+                                min="0"
+                                name="incomeCosts"
+                                aria-describedby="incomeCostsHelp"
+                                />
+                            <small id="incomeCostsHelp" class="form-text text-muted">Koszty uzyskania przychodu netto</small>           
                         </div>
                     </div>
                     <div className="form-group row">
                         <label htmlFor="previusMonthsIncomes" className="col-sm-2 col-form-label">Przychody</label>
                         <div className="col-sm-10 col-md-8 col-lg-6">
-                            <Field className="form-control" component="input" type="number" placeholder="Przychód z poprzednich miesięcy netto" name="previusMonthsIncomes" />
+                            <Field 
+                                className="form-control" 
+                                component="input" 
+                                type="number" 
+                                min="0"
+                                name="previusMonthsIncomes" 
+                                aria-describedby="previusMonthsIncomesHelp"
+                                />
+                            <small id="incomeCostsHelp" class="form-text text-muted">Przychód z poprzednich miesięcy netto</small>  
                         </div>
                     </div>
                     <div className="form-group row">
@@ -81,7 +120,15 @@ class SelfEmployeeCalculation extends Component {
                     <div className="form-group row">
                         <label htmlFor="accidentContributionPercentage" className="col-sm-2 col-form-label">Składka wypadkowa</label>
                         <div className="col-sm-10 col-md-8 col-lg-6">
-                            <Field className="form-control" component="input" type="number" placeholder="minimalnie 1,67%" name="accidentContributionPercentage" />
+                            <Field 
+                                className="form-control" 
+                                component="input" 
+                                type="number" 
+                                min="1.67"
+                                name="accidentContributionPercentage" 
+                                aria-describedby="accidentContributionPercentageHelp"
+                                />
+                            <small id="accidentContributionPercentageHelp" class="form-text text-muted">minimalnie 1,67%</small>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -105,7 +152,7 @@ class SelfEmployeeCalculation extends Component {
                         <div className="col-sm-10 col-md-8 col-lg-6">
                             <div className="form-check">
                                 <Field className="form-check-input" component="input" type="checkbox" name="differentMonthlySalary" />
-                                <label className="form-check-label" htmlFor="differentMonthlySalary">Ubezpieczenie zdrowotne?</label>
+                                <label className="form-check-label" htmlFor="differentMonthlySalary">Wynagrodzenie jest inne w pozostałych miesiącach</label>
                             </div>
                         </div>
                     </div>
@@ -127,9 +174,7 @@ class SelfEmployeeCalculation extends Component {
 const mapStateToProps = (state) => {
     return {
         calculationdata: state.selfEmployeeCalculation,
-        calculationDictionary: state.calculationDictionary,
-        initialValues: state.calculationDictionary.CalcualtionDefaultValues
-    };
+        calculationDictionary: state.calculationDictionary    };
 };
 
 const SelfEmployeeCalculationLink = connect(
