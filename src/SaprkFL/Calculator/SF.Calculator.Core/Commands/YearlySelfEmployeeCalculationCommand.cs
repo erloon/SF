@@ -13,7 +13,7 @@ namespace SF.Calculator.Core.Commands
         public bool IsReliefForSocialInsurance { get; set; }
         public TaxationForm TaxationForm { get; set; }
 
-        public List<MonthlyBalanceSheetData> MonthlyBalanceSheetDatas { get; set; }
+        public List<MonthlyBalanceSheetData> MonthlyBalanceSheetData { get; set; }
 
 
     }

@@ -12,11 +12,47 @@ namespace SF.Calculator.Core.Services
         private const string HEALTHBASEKEY = "HealthBaseAmount";
         private const string INSURANCEBASEAMOUNTKEY = "InsuranceBaseAmount";
         private const string INSURANCEBASEAMOUNTWITHDICOUNTKEY = "InsuranceBaseAmountWithDiscount";
+        private const string INSURANCEBASEAMOUNTWITHSTARTKEY = "InsuranceBaseAmountWithStartDiscount";
         public InsuranceContributionService(IInsuranceContributionRepository insuranceContributionRepository, IBaseValuesDictionaryRepository baseValuesDictionaryRepository)
         {
             _insuranceContributionRepository = insuranceContributionRepository ?? throw new ArgumentNullException(nameof(insuranceContributionRepository));
             _baseValuesDictionaryRepository = baseValuesDictionaryRepository ?? throw new ArgumentNullException(nameof(baseValuesDictionaryRepository));
         }
+
+        public InsuranceContributionContext Create(InsuranceContributionForm insuranceContribution,decimal accidentContributionPercentage, bool withMedical)
+        {
+            var key = GetInsuranceBaseAmountKey(insuranceContribution);
+            return new InsuranceContributionContext()
+            {
+                HealthBaseAmount = GetValue(HEALTHBASEKEY),
+                InsuranceBaseAmount = GetValue(key),
+                Percentage = _insuranceContributionRepository.GetPercentage(),
+                IsMedicalInsurance = withMedical
+            };
+        }
+
+        private string GetInsuranceBaseAmountKey(InsuranceContributionForm insuranceContribution)
+        {
+            string key;
+            switch (insuranceContribution)
+            {
+                case InsuranceContributionForm.LACK:
+                    key = INSURANCEBASEAMOUNTWITHSTARTKEY;
+                    break;
+                case InsuranceContributionForm.NORMAL:
+                    key = INSURANCEBASEAMOUNTKEY;
+                    break;
+                case InsuranceContributionForm.PREFERENTIAL:
+                    key = INSURANCEBASEAMOUNTWITHDICOUNTKEY;
+                    break;
+                default:
+                    key = INSURANCEBASEAMOUNTKEY;
+                    break;
+            }
+
+            return key;
+        }
+
         public InsuranceContributionContext Get(decimal accidentContributionPercentage, bool withMedical)
         {
             return new InsuranceContributionContext()
@@ -28,7 +64,7 @@ namespace SF.Calculator.Core.Services
             };
         }
 
-        public InsuranceContributionContext GetWithDicount(decimal accidentContributionPercentage, bool withMedical)
+        public InsuranceContributionContext GetWithDiscount(decimal accidentContributionPercentage, bool withMedical)
         {
             return new InsuranceContributionContext()
             {

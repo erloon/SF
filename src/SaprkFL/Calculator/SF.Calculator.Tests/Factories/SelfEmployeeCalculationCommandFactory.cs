@@ -19,7 +19,7 @@ namespace SF.Calculator.Tests.Factories
                 IncomeCosts = INCOMECOSTS,
                 IsGross = false,
                 IsMedicalInsurance = false,
-                IsReliefForSocialInsurance = false,
+                InsuranceContributionForm = InsuranceContributionForm.NORMAL,
                 Salary = SALARY,
                 TaxationForm = TAXIATIONFORM,
                 VatAmmountDeduction = VATDEDCUCTIONS,

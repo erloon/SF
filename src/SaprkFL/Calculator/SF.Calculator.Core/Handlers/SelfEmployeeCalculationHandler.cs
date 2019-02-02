@@ -42,9 +42,7 @@ namespace SF.Calculator.Core.Handlers
                 BaseAmount = request.Salary,
                 IncomeCost = request.IncomeCosts,
                 IncomeTaxAmmount = _taxCalculator.Calculate,
-                InsuranceContributionContext = request.IsReliefForSocialInsurance ? 
-                                               _insuranceContributionService.GetWithDicount(request.AccidentContributionPercentage, request.IsMedicalInsurance) : 
-                                               _insuranceContributionService.Get(request.AccidentContributionPercentage, request.IsMedicalInsurance),
+                InsuranceContributionContext = _insuranceContributionService.Create(request.InsuranceContributionForm,request.AccidentContributionPercentage, request.IsMedicalInsurance),
 
                 IsMedicalInsurance = request.IsMedicalInsurance,
                 Month = (Month)DateTime.Today.Month,

@@ -129,6 +129,7 @@ namespace SF.Calculator.Persistence.Migrations
                     { new Guid("35b3126f-b13e-4ac9-acf0-50ae38fec915"), "HealthBaseAmount", "3554.93" },
                     { new Guid("307c9908-343e-4cda-9535-2108ca10cc23"), "InsuranceBaseAmount", "2665.8" },
                     { new Guid("4f4ddde4-a469-49d1-873c-20f64f7b275b"), "InsuranceBaseAmountWithDiscount", "630" },
+                    { new Guid("E85ADA5D-CD4E-4815-B302-270E34BC2969"), "InsuranceBaseAmountWithStartDiscount", "0" },
                     { new Guid("f48b9f46-8269-4b1e-a81a-b075b459985e"), "MonthlyTaxFreeAmount", "46.34" },
                     { new Guid("f65d9257-43c6-499c-878d-bccd32f83374"), "VATTaxRate", "0.23" }
                 });

@@ -35,12 +35,12 @@ namespace SF.Calculator.Core.Handlers
                 AccidentContributionPercentage = request.AccidentContributionPercentage,
                 IncomeTaxAmmount = _taxCalculator.Calculate,
                 InsuranceContributionContext = request.IsReliefForSocialInsurance ?
-                                                        _insuranceContributionService.GetWithDicount(request.AccidentContributionPercentage, request.IsMedicalInsurance) :
+                                                        _insuranceContributionService.GetWithDiscount(request.AccidentContributionPercentage, request.IsMedicalInsurance) :
                                                         _insuranceContributionService.Get(request.AccidentContributionPercentage, request.IsMedicalInsurance),
                 IsGross = request.IsGross,
                 IsMedicalInsurance = request.IsMedicalInsurance,
                 IsReliefForSocialInsurance = request.IsReliefForSocialInsurance,
-                MonthlyBalanceSheetDatas = request.MonthlyBalanceSheetDatas,
+                MonthlyBalanceSheetDatas = request.MonthlyBalanceSheetData,
                 TaxationForm = request.TaxationForm
             };
         }

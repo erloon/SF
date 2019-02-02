@@ -32,6 +32,7 @@ namespace SF.Calculator.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info {Title = "SF API", Version = "v1"}));
             services.AddAutoMapper();
+            services.AddCors();
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -51,7 +52,12 @@ namespace SF.Calculator.API
             {
                 app.UseHsts();
             }
-
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+            });
 
             app.UseHttpsRedirection();
             app.UseMvc();

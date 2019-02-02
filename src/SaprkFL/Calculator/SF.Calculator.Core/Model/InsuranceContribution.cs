@@ -20,7 +20,6 @@ namespace SF.Calculator.Core.Model
         protected InsuranceContribution() { }
         public InsuranceContribution(InsuranceContributionContext contributionContext)
         {
-            if (contributionContext.InsuranceBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(contributionContext.InsuranceBaseAmount));
             if (contributionContext.HealthBaseAmount <= 0) throw new ArgumentOutOfRangeException(nameof(contributionContext.HealthBaseAmount));
             if (contributionContext.Percentage == null) throw new ArgumentNullException(nameof(contributionContext.Percentage));
 
@@ -51,16 +50,16 @@ namespace SF.Calculator.Core.Model
         private void CalculateInsuranceParts(InsuranceContributionsPercentage insuranceContributionsPercentage)
         {
             CalculateHealthInsurance(insuranceContributionsPercentage, this.HealthBaseAmount);
-            CalculateDisabilitiInsurance(insuranceContributionsPercentage.Disability, this.InsuranceBaseAmount);
+            CalculateDisabilityInsurance(insuranceContributionsPercentage.Disability, this.InsuranceBaseAmount);
             CalculateRetirementInsurance(insuranceContributionsPercentage.Retirement, this.InsuranceBaseAmount);
             CalculateAccidentInsurance(insuranceContributionsPercentage.Accident, this.InsuranceBaseAmount);
-            CalculatLaborFoundInsurance(insuranceContributionsPercentage.LaborFound, this.InsuranceBaseAmount);
+            CalculateLaborFoundInsurance(insuranceContributionsPercentage.LaborFound, this.InsuranceBaseAmount);
 
             if (this.WithMedicalInsurance) CalculateMedicalInsurance(insuranceContributionsPercentage.Medical, this.InsuranceBaseAmount);
 
         }
 
-        private void CalculatLaborFoundInsurance(decimal laborFound, decimal insuranceBaseAmount)
+        private void CalculateLaborFoundInsurance(decimal laborFound, decimal insuranceBaseAmount)
         {
             this.LaborFoundInsurance = CalculateInsurance(laborFound, insuranceBaseAmount);
         }
@@ -75,9 +74,9 @@ namespace SF.Calculator.Core.Model
             this.RetirementInsurance = CalculateInsurance(retirement, insuranceBaseAmount);
         }
 
-        private void CalculateDisabilitiInsurance(decimal disabiliti, decimal insuranceBaseAmount)
+        private void CalculateDisabilityInsurance(decimal disability, decimal insuranceBaseAmount)
         {
-            this.DisabilityInsurance = CalculateInsurance(disabiliti, insuranceBaseAmount);
+            this.DisabilityInsurance = CalculateInsurance(disability, insuranceBaseAmount);
         }
 
         private void CalculateMedicalInsurance(decimal medical, decimal insuranceBaseAmount)
