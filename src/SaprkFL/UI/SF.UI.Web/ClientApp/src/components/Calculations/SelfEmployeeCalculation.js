@@ -1,102 +1,134 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { CalculateSalary } from '../../actions/SelfEmployeeCalculationActions';
-import { stat } from 'fs';
+import { calculateSalary } from '../../actions/SelfEmployeeCalculationActions';
+import { getDictionaries } from "../../actions/DictionaryActions";
 
 class SelfEmployeeCalculation extends Component {
+    onSubmit = (formValues) => {
+
+        debugger;
+        this.props.calculateSalary(formValues)
+    }
+    componentDidMount() {
+        debugger;
+        this.props.getDictionaries();
+    }
+    renderOption = (values) => {
+        return values.map(v => {
+            return (
+                <option value={v.value} key={v.value}>{v.name}</option>
+            )
+        });
+
+    }
 
     render() {
-
+        if (!this.props.calculationDictionary) {
+            return <div>Loading ... </div>
+        }
+        const { InsuranceContributionForm, TxationForm } = this.props.calculationDictionary;
         return (
             <div>
-                <div className="row">
-
-                    <p className="h3 text-center">Kalkulacja</p>
-                    <p className="lead">
-                        Oblicz wysokość wynagrodzenia dla dziłalności gospodarczej
-                    </p>
-                </div>
-                <div className="row">
-                    <form >
-                        <div className="form-row">
-                            <div className="form-group col">
-                                <label htmlFor="salary">Wynagrodzenie</label>
-                                <Field className="form-control" component="input" type="number" placeholder="Kwota na jaką wystawiasz fakturę" name="salary" />
-                            </div>
+                <h1 className="text-center">Kalkulacja</h1>
+                <p className="lead text-center">Oblicz wysokość wynagrodzenia dla jednoosobowej działalności gospodarczej.</p>
+                <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label" htmlFor="salary">Wynagrodzenie</label>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
+                            <Field className="form-control" component="input" type="number" placeholder="Kwota na jaką wystawiasz fakturę" name="salary" />
                         </div>
-                        <div className="form-group">
+                    </div>
+                    <div className="form-group row">
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
                             <div className="form-check">
                                 <Field className="form-check-input" component="input" type="checkbox" name="isGross" />
                                 <label className="form-check-label" htmlFor="isGross">z VAT?</label>
                             </div>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="vatAmmountDeduction">Odliczenie VAT</label>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="vatAmmountDeduction" className="col-sm-2 col-form-label">Odliczenie VAT</label>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
                             <Field className="form-control" component="input" type="number" placeholder="Kwota VAT do odliczenia z faktur kosztowych" name="vatAmmountDeduction" />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="incomeCosts">Koszty</label>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="incomeCosts" className="col-sm-2 col-form-label">Koszty</label>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
                             <Field className="form-control" component="input" type="number" placeholder="Koszty uzyskania przychodu netto" name="incomeCosts" />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="previusMonthsIncomes">Przychody</label>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="previusMonthsIncomes" className="col-sm-2 col-form-label">Przychody</label>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
                             <Field className="form-control" component="input" type="number" placeholder="Przychód z poprzednich miesięcy netto" name="previusMonthsIncomes" />
                         </div>
-                        <div className="form-group">
-                            <div className="form-check ">
+                    </div>
+                    <div className="form-group row">
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
+                            <div className="form-check">
                                 <Field className="form-check-input" component="input" type="checkbox" name="isMedicalInsurance" />
-                                <label className="form-check-label" htmlFor="isMedicalInsurance">Ubezpieczenie zdrowotne?</label>
-                            </div>
+                                <label className="form-check-label" htmlFor="isMedicalInsurance">Ubezpieczenie zdrowotne?</label>                            </div>
                         </div>
-                        <div className="form-row">
-                            <div className="form-group col">
-                                <label htmlFor="accidentContributionPercentage">Składka wypadkowa (w %)</label>
-                                <Field className="form-control" component="input" type="number" placeholder="minimalnie 1,67" name="accidentContributionPercentage" />
-                            </div>
-                            <div className="form-group col">
-                                <label htmlFor="isReliefForSocialInsurance">Ulga przy składkach ZUS</label>
-                                <Field className="custom-select" component="select" name="isReliefForSocialInsurance" >
-                                    <option value="ff0000">Red</option>
-                                </Field>
-                            </div>
-                            <div className="form-group col">
-                                <label htmlFor="taxationForm">Forma opodatkowania</label>
-                                <Field className="custom-select" component="select" name="taxationForm" >
-                                    <option value="ff0000">Red</option>
-                                </Field>
-                            </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="accidentContributionPercentage" className="col-sm-2 col-form-label">Składka wypadkowa</label>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
+                            <Field className="form-control" component="input" type="number" placeholder="minimalnie 1,67%" name="accidentContributionPercentage" />
                         </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="isReliefForSocialInsurance" className="col-sm-2 col-form-label">Ulga przy składkach ZUS</label>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
+                            <Field className="custom-select" component="select" name="isReliefForSocialInsurance" >
+                                {this.renderOption(InsuranceContributionForm)}
+                            </Field>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="taxationForm" className="col-sm-2 col-form-label">Forma opodatkowania</label>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
+                            <Field className="custom-select" component="select" name="taxationForm" >
+                                {this.renderOption(TxationForm)}
+                            </Field>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                    <div className="col-sm-2"></div>
+                    <div className="col-sm-10 col-md-8 col-lg-6">
+                        <div className="form-check">
+                            <Field className="form-check-input" component="input" type="checkbox" name="differentMonthlySalary" />
+                            <label className="form-check-label" htmlFor="differentMonthlySalary">Ubezpieczenie zdrowotne?</label>                            </div>
+                    </div>
+                </div>
+                    <div className="form-group row">
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-10 col-md-8 col-lg-6">
+                            <button type="submit" className="btn btn-info btn-sm btn-block active">Przelicz dla miesiąca</button>
+                            <button type="button" className="btn btn-secondary btn-sm btn-block active">Przelicz dla roku</button>
+                        </div>
+                    </div>
 
-                        <hr />
-                        <button type="button" className="btn btn-info" onClick={() => this.props.calculate()} >Dalej</button>
-                        <button type="submit" className="btn btn-success">Przelicz</button>
-                    </form>
+                </form>
 
-                </div >
             </div>
         );
     }
+
 }
-
 const mapStateToProps = (state) => {
-
     return {
-        data: state.testData,
-        calculationdata: state.selfEmployeeCalculation
+        calculationdata: state.selfEmployeeCalculation,
+        calculationDictionary: state.calculationDictionary
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        calculate: bindActionCreators(CalculateSalary, dispatch)
-    };
-}
-
 const SelfEmployeeCalculationLink = connect(
     mapStateToProps,
-    mapDispatchToProps
+    { calculateSalary, getDictionaries }
 )(SelfEmployeeCalculation);
 
 export default reduxForm({
