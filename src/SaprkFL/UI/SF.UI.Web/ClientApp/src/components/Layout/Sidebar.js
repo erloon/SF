@@ -15,8 +15,16 @@ class Sidebar extends React.Component {
                     <li>
                         <Link to="/">Home</Link>
                     </li>
-                    <li>
-                        <Link to="/selfemployeecalculation">Kalkulacja</Link>
+                    <li className="active">
+                        <a href="#calculationSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Szybka kalkulacja</a>
+                        <ul className="collapse list-unstyled" id="calculationSubmenu">
+                            <li>
+                                <Link to="/calculation">Kalkulacja</Link>
+                            </li>
+                            <li>
+                                <Link to="">Zapisane wyniki</Link>
+                            </li>
+                        </ul>
                     </li>
                     <li className="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Finanse</a>
