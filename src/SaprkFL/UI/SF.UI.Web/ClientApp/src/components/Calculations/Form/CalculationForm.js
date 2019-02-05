@@ -5,7 +5,7 @@ import CalculationFormNumberField from './CalculationFormNumberField';
 import CalculationFormCheckField from './CalculationFormCheckField';
 import CalculationFormSelectField from './CalculationFormSelectField';
 import CalculationFormSubmit from './CalculationFormSubmit';
-import { getDictionaries } from "../../actions/DictionaryActions";
+import { getDictionaries } from "../../../actions/DictionaryActions";
 
 class CalculationForm extends Component {
     onSubmit = (formValues) => {

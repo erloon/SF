@@ -5,8 +5,11 @@ const CalculationFormSelectField  = ({label, name, options}) =>
                         <div className="form-group row">
                             <label htmlFor={name} className="col-sm-2 col-form-label">{label}</label>
                             <div className="col-sm-10 col-md-8 col-lg-6">
-                                <Field className="custom-select" component="select" name={name} >
-                                    {options}
+                                <Field 
+                                    lassName="custom-select" 
+                                    component="select" 
+                                    name={name} >
+                                        {options}
                                 </Field>
                             </div>
                         </div>

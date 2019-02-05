@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { calculateMonthlySalary, setCalculationType, calculateYearlySalary } from '../../actions/CalculationActions';
-import CalculationForm from './CalculationForm';
+import CalculationForm from './Form/CalculationForm';
 
 class Calculation extends Component {
     onSubmit = (formValues) => {
-        debugger;
         if(this.props.calculationType ==="monthly"){
-            this.props.calculateMonthlySalary(formValues)
+            this.props.calculateMonthlySalary(formValues);
         }
         else if(this.props.calculationType ==="yearly"){
-            this.props.calculateYearlySalary(formValues)
+            this.props.calculateYearlySalary(formValues);
         }
-        
     };
     setCalculationType = (type)=>{
         this.props.setCalculationType(type);
@@ -53,4 +51,4 @@ const mapStateToProps = (state)=>{
     }
 }
 
-export default connect(mapStateToProps,{calculateMonthlySalary, setCalculationType, calculateYearlySalary})(Calculation)
+export default connect(mapStateToProps,{calculateMonthlySalary, setCalculationType, calculateYearlySalary})(Calculation);
