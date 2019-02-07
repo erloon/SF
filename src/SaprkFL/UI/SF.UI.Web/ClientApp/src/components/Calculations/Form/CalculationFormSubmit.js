@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field } from 'redux-form';
 
 const CalculationFormSubmit = ({ description }) =>
     <div className="form-group row">

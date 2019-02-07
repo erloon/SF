@@ -6,7 +6,7 @@ const CalculationFormSelectField  = ({label, name, options}) =>
                             <label htmlFor={name} className="col-sm-2 col-form-label">{label}</label>
                             <div className="col-sm-10 col-md-8 col-lg-6">
                                 <Field 
-                                    lassName="custom-select" 
+                                    className="form-control" 
                                     component="select" 
                                     name={name} >
                                         {options}

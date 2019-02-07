@@ -1,6 +1,6 @@
 import { CALCULATE_MONTHLY_SALARY, SET_CALCULATION_TYPE, CALCULATE_YEARLY_SALARY } from '../actions/types'
 
-const initialState = { calculationResult: {} };
+const initialState = { calculationResult: {}, calculationType:'monthly' };
 
 export default (state = initialState, action) => {
   switch (action.type) {
