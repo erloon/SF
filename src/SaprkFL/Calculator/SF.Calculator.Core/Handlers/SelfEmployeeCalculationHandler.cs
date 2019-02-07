@@ -46,7 +46,7 @@ namespace SF.Calculator.Core.Handlers
 
                 IsMedicalInsurance = request.IsMedicalInsurance,
                 Month = (Month)DateTime.Today.Month,
-                PreviusMonthsIncome = request.PreviusMonthsIncomes,
+                PreviusMonthsIncome = request.PreviousMonthsIncomes,
                 TaxationForm = request.TaxationForm,
                 IsGross = request.IsGross,
                 VatTaxRate = GetValue(VATKEY),

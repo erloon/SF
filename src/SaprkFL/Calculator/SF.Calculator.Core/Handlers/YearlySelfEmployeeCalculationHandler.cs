@@ -33,14 +33,12 @@ namespace SF.Calculator.Core.Handlers
             return new YearlySelfEmployeeCalculationContext()
             {
                 AccidentContributionPercentage = request.AccidentContributionPercentage,
-                IncomeTaxAmmount = _taxCalculator.Calculate,
-                InsuranceContributionContext = request.IsReliefForSocialInsurance ?
-                                                        _insuranceContributionService.GetWithDiscount(request.AccidentContributionPercentage, request.IsMedicalInsurance) :
-                                                        _insuranceContributionService.Get(request.AccidentContributionPercentage, request.IsMedicalInsurance),
+                IncomeTaxAmount = _taxCalculator.Calculate,
+                InsuranceContributionContext = _insuranceContributionService.Create(request.InsuranceContributionForm,request.AccidentContributionPercentage, request.IsMedicalInsurance),
                 IsGross = request.IsGross,
                 IsMedicalInsurance = request.IsMedicalInsurance,
-                IsReliefForSocialInsurance = request.IsReliefForSocialInsurance,
-                MonthlyBalanceSheetDatas = request.MonthlyBalanceSheetData,
+                //IsReliefForSocialInsurance = request.InsuranceContributionForm,
+                MonthlyBalanceSheetData = request.MonthlyBalanceSheetData,
                 TaxationForm = request.TaxationForm
             };
         }

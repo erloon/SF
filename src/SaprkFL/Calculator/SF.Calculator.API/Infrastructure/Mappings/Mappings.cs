@@ -16,26 +16,8 @@ namespace SF.Calculator.API.Infrastructure.Mappings
                 .ForMember(x => x.VatAmount, o => o.MapFrom(s => s.VatAmount))
                 .ForMember(x => x.NetSalary, o => o.MapFrom(s => s.NetPay))
                 .ForMember(x => x.NetSalaryEstimate, o => o.MapFrom(s => s.NetPayEstimate))
+                .ForMember(x => x.TaxAmount, o => o.MapFrom(s => s.TaxAmount))
                 .ForMember(x => x.TaxBase, o => o.MapFrom(s => s.TaxBaseAmount));
-
-            //CreateMap<SelfEmployeeCalculation, MonthlySelfEmployeeCalculationResult>()
-            //    .AfterMap((s, d) =>
-            //    {
-            //        d = new MonthlySelfEmployeeCalculationResult()
-            //        {
-            //            Month = s.Month,
-            //            Result = new SelfEmployeeCalculationResult()
-            //            {
-            //                IncomeCosts = s.IncomeCostsAmount,
-            //                //InsuranceContribution = Mapper.Map<InsuranceContributionResult>(s.InsuranceContribution),
-            //                NetSalary = s.NetPay,
-            //                NetSalaryEstimate = s.NetPayEstimate,
-            //                TaxBase = s.TaxBaseAmount,
-            //                VatAmount = s.VatAmount
-            //            }
-            //        };
-            //    })
-            //    .ForMember(x => x.Month, o => o.MapFrom(s => s.Month));
 
             CreateMap<SelfEmployeeCalculation, MonthlySelfEmployeeCalculationResult>()
                 .ForMember(x => x.Month, o => o.MapFrom(s => s.Month))

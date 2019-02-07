@@ -26,7 +26,7 @@ namespace SF.Calculator.Core.Model
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
-            foreach (var monthlyBalanceSheetData in context.MonthlyBalanceSheetDatas)
+            foreach (var monthlyBalanceSheetData in context.MonthlyBalanceSheetData)
             {
                 var monthlyContext = CreateMonthlyContext(context, monthlyBalanceSheetData);
                 var calculation = new SelfEmployeeCalculation(monthlyContext);
@@ -50,7 +50,7 @@ namespace SF.Calculator.Core.Model
                 IsMedicalInsurance = context.IsMedicalInsurance,
                 PreviusMonthsIncome = this.TotalIncomes,
                 TaxationForm = context.TaxationForm,
-                IncomeTaxAmmount = context.IncomeTaxAmmount
+                IncomeTaxAmmount = context.IncomeTaxAmount
             };
         }
 

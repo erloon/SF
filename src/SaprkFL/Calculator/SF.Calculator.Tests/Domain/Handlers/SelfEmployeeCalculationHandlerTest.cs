@@ -56,6 +56,9 @@ namespace SF.Calculator.Tests.Domain.Handlers
                 .Returns(context);
             _insuranceContributionService.Setup(x => x.Get(It.IsAny<decimal>(), It.IsAny<bool>()))
                 .Returns(context);
+            _insuranceContributionService.Setup(x =>
+                    x.Create(It.IsAny<InsuranceContributionForm>(), It.IsAny<decimal>(), It.IsAny<bool>()))
+                .Returns(context);
 
 
            

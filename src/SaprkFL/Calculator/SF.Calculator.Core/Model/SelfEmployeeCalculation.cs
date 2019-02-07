@@ -29,18 +29,25 @@ namespace SF.Calculator.Core.Model
                 throw new ArgumentOutOfRangeException(nameof(calculationContext.IncomeCost));
 
             this.Id = Guid.NewGuid();
-            this.TaxBaseAmount = calculationContext.BaseAmount;
+            CalculateVatAmount(calculationContext);
+
+            this.TaxBaseAmount = CalculateTaxBaseAmount(calculationContext.BaseAmount,calculationContext.IsGross);
             this.IncomeCostsAmount = calculationContext.IncomeCost;
             this.Month = calculationContext.Month;
 
-            CalculateVatAmount(calculationContext);
             AddInsuranceContribution(calculationContext.InsuranceContributionContext);
-            CalcualteMonthlyBaseAmount(calculationContext);
+            CalculateMonthlyBaseAmount(calculationContext);
             CalculateIncomeTax(calculationContext);
             CalculateNetPay(calculationContext);
             CalculateNetPayEstimate(calculationContext);
         }
 
+        private decimal CalculateTaxBaseAmount(decimal baseAmount, bool isGross)
+        {
+            if (isGross)
+                return baseAmount - VatAmount;
+            return baseAmount;
+        }
         private void CalculateVatAmount(SelfEmployeeCalculationContext calculationContext)
         {
             //TODO Add vat rate to command and context
@@ -55,7 +62,7 @@ namespace SF.Calculator.Core.Model
             this.InsuranceContribution = new InsuranceContribution(insuranceContributionContext);
         }
 
-        private void CalcualteMonthlyBaseAmount(SelfEmployeeCalculationContext context)
+        private void CalculateMonthlyBaseAmount(SelfEmployeeCalculationContext context)
         {
             this.BaseAmount = Math.Round(this.TaxBaseAmount - this.IncomeCostsAmount -
                               this.InsuranceContribution.SocialInsuranceContributionSum(), 0);

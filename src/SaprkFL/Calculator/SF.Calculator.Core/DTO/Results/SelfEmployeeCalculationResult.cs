@@ -7,6 +7,7 @@
         public decimal GrossSalary => TaxBase + VatAmount;
         public decimal IncomeCosts { get; set; }
         public decimal TaxBase { get; set; }
+        public decimal TaxAmount { get; set; }
         public decimal VatAmount { get; set; }
         public InsuranceContributionResult InsuranceContribution { get; set; }
     }

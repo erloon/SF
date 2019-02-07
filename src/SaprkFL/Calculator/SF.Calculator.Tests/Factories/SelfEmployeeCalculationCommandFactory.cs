@@ -22,7 +22,7 @@ namespace SF.Calculator.Tests.Factories
                 InsuranceContributionForm = InsuranceContributionForm.NORMAL,
                 Salary = SALARY,
                 TaxationForm = TAXIATIONFORM,
-                VatAmmountDeduction = VATDEDCUCTIONS,
+                VatAmountDeduction = VATDEDCUCTIONS,
 
             };
         }

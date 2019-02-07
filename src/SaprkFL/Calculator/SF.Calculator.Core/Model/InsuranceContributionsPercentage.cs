@@ -30,5 +30,10 @@ namespace SF.Calculator.Core.Model
             LaborFound = laborFound;
             IsActive = isActive;
         }
+
+        public void AddAccidentPercentage(decimal accidentPercentage)
+        {
+            this.Accident = accidentPercentage;
+        }
     }
 }

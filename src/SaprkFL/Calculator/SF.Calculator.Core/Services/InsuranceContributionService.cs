@@ -19,16 +19,19 @@ namespace SF.Calculator.Core.Services
             _baseValuesDictionaryRepository = baseValuesDictionaryRepository ?? throw new ArgumentNullException(nameof(baseValuesDictionaryRepository));
         }
 
-        public InsuranceContributionContext Create(InsuranceContributionForm insuranceContribution,decimal accidentContributionPercentage, bool withMedical)
+        public InsuranceContributionContext Create(InsuranceContributionForm insuranceContribution, decimal accidentContributionPercentage, bool withMedical)
         {
             var key = GetInsuranceBaseAmountKey(insuranceContribution);
-            return new InsuranceContributionContext()
+            var context = new InsuranceContributionContext()
             {
                 HealthBaseAmount = GetValue(HEALTHBASEKEY),
                 InsuranceBaseAmount = GetValue(key),
                 Percentage = _insuranceContributionRepository.GetPercentage(),
                 IsMedicalInsurance = withMedical
             };
+            context.Percentage.AddAccidentPercentage(accidentContributionPercentage/100);
+            return context;
+
         }
 
         private string GetInsuranceBaseAmountKey(InsuranceContributionForm insuranceContribution)
@@ -68,7 +71,7 @@ namespace SF.Calculator.Core.Services
         {
             return new InsuranceContributionContext()
             {
-                HealthBaseAmount = GetValue(HEALTHBASEKEY), 
+                HealthBaseAmount = GetValue(HEALTHBASEKEY),
                 InsuranceBaseAmount = GetValue(INSURANCEBASEAMOUNTWITHDICOUNTKEY),
                 Percentage = _insuranceContributionRepository.GetPercentage(),
                 IsMedicalInsurance = withMedical

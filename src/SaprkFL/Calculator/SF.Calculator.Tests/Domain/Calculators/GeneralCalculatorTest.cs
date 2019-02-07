@@ -55,7 +55,7 @@ namespace SF.Calculator.Tests.Domain.Calculators
         }
 
         [Test, TestCaseSource(typeof(TaxCalculationContextTestCaseFactory), "TestCases")]
-        public decimal Calcualte_ShouldCalculate_Success(TaxCalculationContext context)
+        public decimal Calculate_ShouldCalculate_Success(TaxCalculationContext context)
         {
             _taxPercentagesService.Setup(x => x.GetGeneralIncomeTaxThresholds()).Returns(CreateThreshlds());
 
