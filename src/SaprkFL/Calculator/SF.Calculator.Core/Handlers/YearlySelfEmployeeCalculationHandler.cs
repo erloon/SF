@@ -24,8 +24,8 @@ namespace SF.Calculator.Core.Handlers
         public Task<YearlySelfEmployeeCalculation> Handle(YearlySelfEmployeeCalculationCommand request, CancellationToken cancellationToken)
         {
             var context = CreateContext(request);
-            var calcualtion = new YearlySelfEmployeeCalculation(context);
-            return Task.FromResult<YearlySelfEmployeeCalculation>(calcualtion);
+            var calculation = new YearlySelfEmployeeCalculation(context);
+            return Task.FromResult<YearlySelfEmployeeCalculation>(calculation);
         }
 
         private YearlySelfEmployeeCalculationContext CreateContext(YearlySelfEmployeeCalculationCommand request)
@@ -37,7 +37,6 @@ namespace SF.Calculator.Core.Handlers
                 InsuranceContributionContext = _insuranceContributionService.Create(request.InsuranceContributionForm,request.AccidentContributionPercentage, request.IsMedicalInsurance),
                 IsGross = request.IsGross,
                 IsMedicalInsurance = request.IsMedicalInsurance,
-                //IsReliefForSocialInsurance = request.InsuranceContributionForm,
                 MonthlyBalanceSheetData = request.MonthlyBalanceSheetData,
                 TaxationForm = request.TaxationForm
             };

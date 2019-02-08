@@ -24,7 +24,7 @@ namespace SF.Calculator.API.Infrastructure.Mappings
                 .ForMember(x => x.Result, o => o.ResolveUsing<MonthlySelfEmployeeCalculationResolver>());
 
             CreateMap<YearlySelfEmployeeCalculation, YearlySelfEmployeeCalculationResult>()
-                .ForMember(x => x.IncomeCostsSum, o => o.MapFrom(s => s.TotalIncomes))
+                .ForMember(x => x.IncomeCostsSum, o => o.MapFrom(s => s.TotalCosts))
                 .ForMember(x => x.NetSalarySum, o => o.MapFrom(s => s.TotalIncomes))
                 .ForMember(x => x.MonthlyResults, o => o.MapFrom(s => s.Calculations));
 

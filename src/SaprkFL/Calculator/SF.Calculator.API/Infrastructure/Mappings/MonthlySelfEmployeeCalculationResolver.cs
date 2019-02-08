@@ -24,7 +24,9 @@ namespace SF.Calculator.API.Infrastructure.Mappings
                 NetSalary = source.NetPay,
                 NetSalaryEstimate = source.NetPayEstimate,
                 TaxBase = source.TaxBaseAmount,
-                VatAmount = source.VatAmount
+                VatAmount = source.VatAmount,
+                TaxAmount = source.TaxAmount,
+                
             };
         }
     }

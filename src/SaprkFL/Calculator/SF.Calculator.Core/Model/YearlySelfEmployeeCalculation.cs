@@ -10,6 +10,8 @@ namespace SF.Calculator.Core.Model
         public decimal TotalIncomes { get; protected set; }
         public decimal TotalCosts { get; protected set; }
 
+        private decimal _vatTaxeRate = 0.23m;
+        private decimal _taxFreeAmount = 46.34m;
         public virtual List<SelfEmployeeCalculation> Calculations { get; protected set; }
 
         protected YearlySelfEmployeeCalculation() { }
@@ -50,7 +52,9 @@ namespace SF.Calculator.Core.Model
                 IsMedicalInsurance = context.IsMedicalInsurance,
                 PreviusMonthsIncome = this.TotalIncomes,
                 TaxationForm = context.TaxationForm,
-                IncomeTaxAmmount = context.IncomeTaxAmount
+                IncomeTaxAmmount = context.IncomeTaxAmount,
+                VatTaxRate = _vatTaxeRate,
+                MonthlyTaxFreeAmount = _taxFreeAmount
             };
         }
 
