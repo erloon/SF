@@ -10,5 +10,5 @@ export default combineReducers({
     routing: routerReducer,
     form: formReducer,
     layout : layoutReducer,
-    calculationDictionary: dictionariesReducer
+    dictionary: dictionariesReducer
 });

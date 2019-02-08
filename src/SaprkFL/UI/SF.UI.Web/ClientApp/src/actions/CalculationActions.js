@@ -10,7 +10,6 @@ export const calculateMonthlySalary = (formValues) => {
 
 export const calculateYearlySalary = (formValues) => {
     return async (dispatch, getState) => {
-        debugger;
         const response = await calculation.post('/api/Calculations/YearlySelfEmployeeCalculation', { ...formValues });
         dispatch({ type: CALCULATE_YEARLY_SALARY, payload: response.data });
     };
