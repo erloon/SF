@@ -1,14 +1,10 @@
 import React from 'react';
-import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import Navigation from '../Layout/Navigation';
 
 export default props => (
-  <div className="wrapper">
-
-   <Sidebar/>
-
-    <div id="content">
-      <Navbar/>
+  <div>
+    <Navigation />
+    <div>
       {props.children}
     </div>
   </div>

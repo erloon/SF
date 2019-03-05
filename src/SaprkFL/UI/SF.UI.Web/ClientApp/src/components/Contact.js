@@ -1,11 +1,19 @@
 import React from 'react';
-
-class Contact extends React.Component{
-    render(){
+import SectionHeader from './Layout/SectionHeader';
+class Contact extends React.Component {
+    render() {
         return (
-            <div>
-            <h2>Kontakt</h2>
-            </div>
+            <section className="section-services section-t8">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="title-wrap d-flex justify-content-between">
+                                <SectionHeader title="Kontakt" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         )
     }
 }
