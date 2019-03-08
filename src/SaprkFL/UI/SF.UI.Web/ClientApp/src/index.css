@@ -240,9 +240,6 @@ a:hover {
 
 /*------/ Title /------*/
 
-.title-wrap {
-  padding-bottom: 4rem;
-}
 
 .title-a {
   font-size: 2.6rem;
@@ -427,22 +424,9 @@ a:hover {
   margin-right: 25px;
 }
 
-.jumbotron {
-  margin-top: 5rem;
-  background-image: url("./img/freelancerJubotron.jpg");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 55vh;
-}
 
-.jumbotron-title {
-  color: white;
-}
-
-.header__text{
-  margin-bottom: 2rem;
+.section-form{
+  /* margin-bottom: 2rem; */
 }
 /* Back to top button */
 
@@ -1589,29 +1573,11 @@ footer .credits {
   font-size: 13px;
 }
 
-.form-a label {
-  color: #000000;
-  position: relative;
-}
-
 .form-a select.form-control-lg:not([size]):not([multiple]) {
   height: 3.5rem;
 }
 
-.form-a .form-control {
-  border-radius: 0;
-  font-size: 1.1rem;
-  font-weight: 300;
-}
 
-.form-a .form-control.form-control-a {
-  height: 3.5rem;
-}
-
-.form-a .form-control:focus {
-  box-shadow: none;
-  border-color: #2eca6a;
-}
 
 /*======================================
 //--//-->   BUTTON

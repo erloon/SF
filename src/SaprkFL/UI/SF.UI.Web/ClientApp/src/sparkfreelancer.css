@@ -1,0 +1,64 @@
+
+
+/* TITLE */
+.title-wrap {
+    padding-bottom: 4rem;
+  }
+  
+  .title-calculator-wrap {
+    padding-bottom: 1rem;
+  }
+  
+
+/* FORM */
+.form-a .form-control {
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+  
+  .form-a .form-control.form-control-a {
+    height: 3.5rem;
+  }
+  
+  .form-a .form-control:focus {
+    box-shadow: none;
+    border-color: #2eca6a;
+  }
+
+.form-a label {
+    color: #000000;
+    position: relative;
+  }
+
+ 
+  .form-check{
+    position: relative;
+    display: block;
+    padding-left: 1.25rem
+  }
+
+.form-check-middle {
+    margin-top: 0.5rem;
+  }
+
+
+  /* HEADER */
+  .jumbotron {
+    margin-top: 5rem;
+    background-image: url("./img/freelancerJubotron.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 55vh;
+  }
+  
+  .jumbotron-title {
+    color: white;
+  }
+  
+  .header__text{
+    margin-bottom: 2rem;
+  }
+  

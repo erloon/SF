@@ -5,8 +5,6 @@ class Header extends React.Component {
         return (
             <Fragment>
                 <div className="jumbotron jumbotron-fluid">
-                    <div className="container">
-                    </div>
                 </div>
                 <div className="container header__text text-center">
                     <blockquote className="blockquote">

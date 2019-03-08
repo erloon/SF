@@ -13,7 +13,7 @@ class Navigation extends React.Component {
                             <span></span>
                             <span></span>
                         </button>
-                        <a className="navbar-brand text-brand" href="index.html">Spark<span className="color-b"> Freelancer</span></a>
+                        <Link className="navbar-brand text-brand" to="/">Spark<span className="color-b"> Freelancer</span></Link>
                         <button type="button" className="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
                             data-target="#navbarTogglerDemo01" aria-expanded="false">
                             <span className="fa fa-search" aria-hidden="true"></span>

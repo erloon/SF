@@ -3,6 +3,7 @@ import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import './index.css';
+import './sparkfreelancer.css';
 
 
 import React from 'react';

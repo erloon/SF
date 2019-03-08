@@ -1,9 +1,9 @@
 import React from 'react';
 
-class SectionHeader extends React.Component {
+class CalculatorSectionHeader extends React.Component {
     render() {
         return (
-            <div className="title-wrap d-flex justify-content-center">
+            <div className="title-calculator-wrap d-flex justify-content-center">
                 <div className="title-box">
                     <h2 className="title-a">{this.props.title}</h2>
                 </div>
@@ -12,4 +12,4 @@ class SectionHeader extends React.Component {
     }
 };
 
-export default SectionHeader;
+export default CalculatorSectionHeader;
